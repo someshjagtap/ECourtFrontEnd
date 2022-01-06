@@ -1,0 +1,217 @@
+&nbsp;<br />
+&nbsp;<br />
+<div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+  <mat-label i18n fxFlex="100">
+    *All these spares and tools should be kept store in lock
+    and key. 4 Nos. of keys should be available and distribute to four different person.</mat-label>
+</div>
+
+&nbsp;<br />
+&nbsp;<br />
+&nbsp;<br />
+&nbsp;<br />
+
+<form
+      name="editForm"
+      role="form"
+      novalidate
+      (ngSubmit)="save()"
+      #editForm="ngForm"
+      class="form-field-full">
+  <div fxLayout="row wrap" class="matero-row">
+    <div fxFlex="100" class="matero-col">
+
+      <div fxLayout="row" fxFlex.lt-sm="100">
+        <div fxFlex="50" fxLayout="column" fxLayoutGap="8px grid">
+          <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          </div>
+        </div>
+        <div fxFlex="50" fxLayout="column" fxLayoutGap="8px grid">
+          <mat-label>Beds in Hospital:</mat-label>
+          <div fxLayout="row wrap" fxLayoutGap="8px grid">
+            <div fxFlex="20" fxFlex.lt-sm="100">
+              <mat-label>Date of Inspection / Audit:</mat-label>
+            </div>
+            <div fxFlex="70" fxFlex.lt-sm="100">
+              <mat-form-field>
+                <mat-label>Date of Inspection/Audit:</mat-label>
+                <input
+                       matInput
+                       name="freeField1"
+                       [matDatepicker]="datePicker5"
+                       [(ngModel)]="detail.freeField1"
+                       #freeField1="ngModel"
+                       [max]="today"
+                       [min]="today"
+                       required
+                       aria-label="Inspection Date"
+                       [disabled]="crudOperation == 'view'"
+                       [readonly]="crudOperation == 'view'" />
+                <mat-datepicker-toggle
+                                       matSuffix
+                                       [for]="datePicker5"
+                                       matSuffix></mat-datepicker-toggle>
+                <mat-datepicker #datePicker5 openOnFocus="true" type="text"></mat-datepicker>
+                <mat-error *ngIf="freeField1.hasError('required')"> Please choose a date. </mat-error>
+                <mat-error *ngIf="freeField1.hasError('matDatepickerMin')">
+                  Please choose a later date.
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div fxFlex="20" fxFlex.lt-sm="100">
+              <mat-label>(Name & Sign of Officer)</mat-label>
+            </div>
+            <div fxFlex="70" fxFlex.lt-sm="100">
+              <mat-form-field>
+                <mat-label>Name of Officer</mat-label>
+                <input
+                       matInput
+                       name="freeField2"
+                       pattern="^[a-zA-Z\s.,]{1,50}$"
+                       minlength="1"
+                       maxlength="150"
+                       [(ngModel)]="detail.freeField2"
+                       [readonly]="crudOperation == 'view'" />
+                <mat-error *ngIf="editForm.controls.freeField2?.errors?.required">
+                  {{ 'validations.required' | translate }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div fxLayout="row wrap" fxLayoutGap="8px grid">
+        <mat-list-item> <span style="font-weight:bold"> Note:</span> Following below checklist need to be filled by the Supplier or
+          Manufacturer
+        </mat-list-item>
+      </div>
+      &nbsp;<br />
+      &nbsp;<br />
+      &nbsp;<br />
+      &nbsp;<br />
+      &nbsp;<br />
+      &nbsp;<br />
+      <mat-card>
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="30" fxFlex.lt-sm="100">
+            <h2>Name of Suppliers:</h2>
+          </div>
+          <div fxFlex="70" fxFlex.lt-sm="100">
+           <div>
+            <mat-form-field>
+              <mat-label>Suppliers Name</mat-label>
+              <input
+                     matInput
+                     ngModel
+                     name="supplierName"
+                     pattern="^[a-zA-Z0-9\s.,]{1,50}$"
+                     [(ngModel)]="detail.supplierName"
+                     min = "0"
+                     minlength="1"
+                     maxlength="50"
+                     [readonly]="crudOperation == 'view'"
+                     #supplierName = "ngModel"/>
+            </mat-form-field>
+           </div>
+            <div *ngIf="!supplierName?.valid && (supplierName?.dirty || supplierName?.touched)">
+              <div *ngIf="supplierName?.errors?.required"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.required" | translate }}
+              </div>
+              <div *ngIf="supplierName?.errors?.pattern"
+                   style="margin-left: 5px; color: red;">
+                   <!-- {{ "validations.required" | translate }} -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="30" fxFlex.lt-sm="100">
+            <h2>Address:</h2>
+          </div>
+          <div fxFlex="70" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>Address</mat-label>
+              <input
+                     matInput
+                     name="supplierAddress"
+                     pattern="^[a-zA-Z0-9\s.,]{1,100}$"
+                     [(ngModel)]="detail.supplierAddress"
+                     [readonly]="crudOperation == 'view'" />
+              <mat-error *ngIf="editForm.controls.supplierAddress?.errors?.required">
+                {{ 'validations.required' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="30" fxFlex.lt-sm="100">
+            <h2>Name of Contact Person:</h2>
+          </div>
+          <div fxFlex="70" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>Name of Contact Person</mat-label>
+              <input
+                     matInput
+                     name="supplierContactName"
+                     pattern="^[a-zA-Z\s.,]{1,50}$"
+                     minlength="1"
+                     maxlength="50"
+                     [(ngModel)]="detail.supplierContactName"
+                     [readonly]="crudOperation == 'view'" />
+              <mat-error *ngIf="editForm.controls.supplierContactName?.errors?.required">
+                {{ 'validations.required' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="30" fxFlex.lt-sm="100">
+            <h2>Contact Number:</h2>
+          </div>
+          <div fxFlex="70" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>Contact Number</mat-label>
+              <input
+                     matInput
+                     name="supplierContactNameNumber"
+                     type="tel" positivenumbers
+                     min = "0"
+                     pattern="^[0-9\s.,]{10,10}$"
+                     minlength="10"
+                     maxlength="10"
+                     [(ngModel)]="detail.supplierContactNameNumber"
+                     [readonly]="crudOperation == 'view'" />
+              <mat-error *ngIf="editForm.controls.supplierContactNameNumber?.errors?.required">
+                {{ 'validations.required' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card>
+      <button
+              *ngIf="crudOperation != 'view'"
+              mat-raised-button
+              color="primary"
+              class="m-t-8"
+              [disabled]="(editForm.form.invalid && isSaving) || hasDone">
+        Save</button>&nbsp;&nbsp;
+      <!-- <button
+              mat-raised-button
+              color="accent"
+              type="button"
+              class="m-t-8"
+              (click)="previousState()"
+              [disabled]="!isSaving">
+        Cancel
+      </button> -->
+      &nbsp;&nbsp;
+    </div>
+  </div>
+</form>
+
+

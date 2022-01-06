@@ -1,0 +1,224 @@
+<page-header></page-header>
+<!-- <div
+     class="matero-row"
+     fxLayout="row wrap"
+     *ngIf="bedTypesLOV != null && pageContext.itemsPerPage > pageContext.totalItems"> -->
+  <!-- Statistics -->
+  <!-- <div
+       class="matero-col"
+       fxFlex.gt-sm="{{ 100 / bedTypesLOV?.length }}"
+       fxFlex.gt-xs="50"
+       fxFlex="100"
+       *ngFor="let bedType of bedTypesLOV">
+
+  </div>
+</div>
+<mat-card>
+  <div fxLayout="row wrap" class="matero-row">
+    <div fxFlex="100" class="matero-col">
+      <mat-form-field class="m-r-8">
+        <mat-label>{{'hospital_list.hospital_name' | translate}}</mat-label>
+        <input matInput [(ngModel)]="search['hospName.contains']" />
+      </mat-form-field>
+
+      <mat-form-field class="m-r-8">
+        <mat-label>{{'Incharge Name' | translate}}</mat-label>
+        <input matInput [(ngModel)]="search['inchargeName.contains']" />
+      </mat-form-field>
+
+ -->
+
+      <!-- <mat-form-field class="m-r-8">
+        <mat-label>{{'hospital_list.category' | translate}}</mat-label>
+        <mat-select [(ngModel)]="search['category.equals']" id="categoryId">
+          <mat-option>-- None --</mat-option>
+          <mat-option value="CENTRAL">{{'Central Goverment' | translate}}</mat-option>
+          <mat-option value="GOVT">{{'Goverment' | translate}}</mat-option>
+          <mat-option value="PRIVATE">{{'Private' | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="m-r-8">
+        <mat-label>{{'hospital_list.sub_category' | translate}}</mat-label>
+        <mat-select [(ngModel)]="search['subCategory.equals']" id="subCategoryId">
+          <mat-option>-- None --</mat-option>
+          <mat-option value="FREE">{{'FREE' | translate}}</mat-option>
+          <mat-option value="MPJAY">{{'MJPJAY/PMJAY' | translate}}</mat-option>
+          <mat-option value="CHARGEABLE">{{'CHARGEABLE' | translate}}</mat-option>
+          <mat-option value="TRUST">{{'CHARITABLE TRUST' | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field> -->
+
+
+      <!-- <mat-form-field class="m-r-8">
+        <mat-label>{{'hospital_list.hospital_type' | translate}}</mat-label>
+        <mat-select [(ngModel)]="search['hospitalTypeId.equals']" id="hospitalTypeId">
+          <mat-option>-- None --</mat-option>
+          <mat-option *ngFor="let hoslist of hospitalTypeList" [value]="hoslist.id">
+            {{ hoslist.name }}</mat-option>
+        </mat-select>
+      </mat-form-field> -->
+
+
+      <!-- <mat-form-field class="m-r-8">
+        <mat-label>{{'hospital_list.district' | translate}}</mat-label>
+        <mtx-select
+                    [items]="districtList"
+                    groupBy="divisionName"
+                    [(ngModel)]="search['districtId.equals']"
+                    (change)="deletObj('talukaId.equals'); deletObj('cityId.equals')"
+                    bindLabel="name"
+                    bindValue="id"
+                    appendTo="body">
+          <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+            <div [ngOptionHighlight]="search">{{ item.name }}</div>
+          </ng-template>
+        </mtx-select>
+      </mat-form-field> -->
+
+
+
+<!-- ------------------------------------------------------------ -->
+      <!-- <mat-form-field class="m-r-8">
+        <mat-label>{{'hospital_list.mun_corp' | translate}}</mat-label>
+        <mtx-select
+                    [items]="municipalCorpList"
+                    [(ngModel)]="search['municipalCorpId.equals']"
+                    (change)="deletObj('talukaId.equals'); deletObj('cityId.equals')"
+                    bindLabel="name"
+                    bindValue="id"
+                    appendTo="body">
+          <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+            <div [ngOptionHighlight]="search">{{ item.name }}</div>
+          </ng-template>
+        </mtx-select>
+      </mat-form-field>
+
+      OR &nbsp;
+      <mat-form-field class="m-r-8">
+        <mat-label>{{'hospital_list.taluka' | translate}}</mat-label>
+        <mtx-select
+                    [items]="talukaList"
+                    groupBy="districtName"
+                    [(ngModel)]="search['talukaId.equals']"
+                    (change)="deletObj('districtId.equals'); deletObj('cityId.equals')"
+                    bindLabel="name"
+                    bindValue="id"
+                    appendTo="body">
+          <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+            <div [ngOptionHighlight]="search">{{ item.name }}</div>
+          </ng-template>
+        </mtx-select>
+      </mat-form-field> -->
+      <!-- OR
+      &nbsp;
+      <mat-form-field class="m-r-8">
+        <mat-label>City/Village</mat-label>
+        <mtx-select [items]="cityList" groupBy="talukaName"
+                    [(ngModel)]="search['cityId.equals']"
+                    (change)="deletObj('districtId.equals');deletObj('talukaId.equals')"
+                    bindLabel="name" bindValue="id">
+          <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+            <div [ngOptionHighlight]="search">{{item.name}}</div>
+          </ng-template>
+        </mtx-select>
+      </mat-form-field> -->
+    <!-- </div>
+  </div>
+  <button mat-raised-button color="primary" (click)="onSearch(false)">{{'hospital_list.search' |
+    translate}}</button> &nbsp; &nbsp;
+  <button mat-raised-button color="danger" (click)="onSearch(true)">{{'hospital_list.reset' |
+    translate}}</button>
+</mat-card> -->
+
+<mtx-grid
+          [data]="list"
+          [columns]="columns"
+          [loading]="isLoading"
+          [columnResizable]="false"
+          [multiSelectable]="false"
+          [rowSelectable]="false"
+          [hideRowSelectionCheckbox]="true"
+          [rowHover]="false"
+          [rowStriped]="true"
+          [columnMovable]="true"
+          [showToolbar]="true"
+          [toolbarTitle]="'Hospitals'"
+          [toolbarTemplate]="toolbarTpl"
+          [expandable]="expandable"
+          [expansionTemplate]="expansionTpl"
+          [pageOnFront]="false"
+          [showPaginator]="true"
+          [length]="pageContext.totalItems"
+          [pageSizeOptions]="[5, 10, 20, 50]"
+          [pageIndex]="pageContext.page"
+          [pageSize]="pageContext.itemsPerPage"
+          (page)="onPageChange($event)"
+          [sortOnFront]="false"
+          (sortChange)="changeSort($event)"
+          [cellTemplate]="{ name: nameTpl }">
+</mtx-grid>
+<ng-template #nameTpl let-row let-index="index" let-col="colDef">
+  <a [routerLink]="'/admin/hospital/view/' + row.id" *authorityHide="['HOSPITAL_VIEW']">{{ row.name
+    }}</a>
+  <div *authorityShow="['HOSPITAL_VIEW']">{{ row.name }}</div>
+</ng-template>
+<ng-template #expansionTpl let-row>
+  <div style="width: 100%;">
+    <!-- <table style="width: 100%;" class="styled-table" *ngIf="row.bedInventory!=null">
+      <thead>
+        <tr>
+          <th scope="col" style="text-align: left;">Bed Type</th>
+          <th scope="col" style="width: 20%;">Bed Count</th>
+          <th scope="col" style="width: 20%;">Bed Available</th>
+          <th scope="col" style="width: 20%; text-align: left;">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let obj of row.bedInventory">
+          <td>{{obj.bedTypeName}}</td>
+          <td>{{obj.count}}</td>
+          <td>{{obj.available}}</td>
+          <td>{{obj.lastModified | date}}</td>
+        </tr>
+      </tbody>
+    </table> -->
+    <table style="width: 100%;" class="styled-table" *ngIf="row.inventory != null">
+      <thead>
+        <tr>
+          <th scope="col" style="text-align: left;">Inventory</th>
+          <th scope="col" style="width: 20%;">Stock</th>
+          <th scope="col" style="width: 20%;">Capcity</th>
+          <th scope="col" style="width: 20%; text-align: left;">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let obj of row.inventory">
+          <td>{{ obj.inventoryMasterName }}</td>
+          <td>{{ obj.stock }}</td>
+          <td>{{ obj.capcity }}</td>
+          <td>{{ obj.lastModified | date }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-template>
+<ng-template #toolbarTpl>
+  <button
+          mat-raised-button
+          color="primary"
+          class="m-t-8"
+          (click)="add()"
+          [disabled]="hasAuditDoneForThisForm"
+          *authorityHide="['AUDIT_FORM_CREATE']">
+    Add New Audit Form S
+  </button>
+  &nbsp;&nbsp;
+  <button
+          mat-raised-button
+          color="warn"
+          class="m-t-8"
+          (click)="previousState()"
+          [disabled]="isSaving">
+    Back
+  </button>
+</ng-template>

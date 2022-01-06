@@ -1,0 +1,38 @@
+<page-header class="p-t-32 p-b-48 m-b--24 bg-gray-900"
+             [title]="hospital!=null ? 'Hospital Users' : 'Supplier Users'">
+</page-header>
+
+<div fxLayout="row wrap" class="matero-row">
+  <div class="matero-col" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-sm="66.67" fxFlex.gt-md="100">
+
+    <app-hospital-card [detail]="hospital" *ngIf="hospital"></app-hospital-card>
+    <app-supplier-card [detail]="supplier" *ngIf="supplier"></app-supplier-card>
+
+    <mtx-grid [data]="list"
+              [columns]="columns"
+              [loading]="isLoading"
+              [rowStriped]="true"
+              [showToolbar]="true"
+              [toolbarTitle]="'Users'"
+              [pageOnFront]="false"
+              [showPaginator]="true"
+              [length]="pageContext.totalItems"
+              [pageSizeOptions]="[5,10,20,50]"
+              [pageIndex]="pageContext.page"
+              [pageSize]="pageContext.itemsPerPage"
+              (page)="onPageChange($event)"
+              [sortOnFront]="false"
+              [toolbarTemplate]="toolbarTpl"
+              (sortChange)="changeSort($event)">
+    </mtx-grid>
+    <ng-template #toolbarTpl>
+      <button mat-raised-button color="primary" class="m-t-8" *authorityHide="'USERS_EDIT'"
+              (click)="add()">Add User</button>
+      &nbsp;&nbsp;
+      <button mat-raised-button color="warn" class="m-t-8" (click)="previousState()"
+              [disabled]="isSaving">Back</button>
+    </ng-template>
+
+  </div>
+
+</div>

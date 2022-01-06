@@ -1,0 +1,297 @@
+<!-- <div fxLayout="row wrap" class="matero-row">
+  <div fxFlex="100" class="matero-col">
+    <mat-card-title>{{data != null ? 'Update Audit':'Add New Audit'}}</mat-card-title>
+    <form name="editForm" role="form" class="form-field-full" novalidate (ngSubmit)="save()"
+          #editForm="ngForm">
+
+      <mat-form-field>
+        <mat-label>Hospital</mat-label>
+        <mtx-select [items]="listLOV" groupBy="talukaName" [(ngModel)]="detail.hospitalId"
+                    placeholder="Type word to search"
+                    name="list" bindLabel="name" bindValue="id" required appendTo="body"
+                    (search)="searchHospitals($event)"
+                    [disabled]="detail.id != null"
+                    [loading]="loading">
+          <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+            <div [ngOptionHighlight]="search">{{ item.name }}</div>
+          </ng-template>
+        </mtx-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Auditor Name</mat-label>
+        <input matInput placeholder="Auditor Name" type="text"
+               name="auditorname"
+               [readonly]="detail.id != null"
+               min="0" [(ngModel)]="detail.freeField1" required />
+        <mat-error *ngIf="editForm.controls.errors?.required">
+
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Audit Date</mat-label>
+        <input matInput name="inspectionDate"
+               [matDatepicker]="datePicker"
+               [(ngModel)]="detail.auditDate"
+               #dateModel="ngModel"
+               [max]="today"
+               [disabled]="detail.id != null"
+               aria-label="Inspection Date">
+        <mat-datepicker-toggle matSuffix [for]="datePicker" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #datePicker openOnFocus="true" type="date"></mat-datepicker>
+
+      </mat-form-field>
+
+     <mat-form-field>
+        <mat-placeholder>Audit Date</mat-placeholder>
+        <mat-datetimepicker-toggle [for]="datetimePicker" matSuffix></mat-datetimepicker-toggle>
+        <mat-datetimepicker #datetimePicker openOnFocus="true" startView="month" timeInterval="5"
+                            type="datetime"></mat-datetimepicker>
+        <input [matDatetimepicker]="datetimePicker" [max]="tomorrow" [min]="today"
+               autocomplete="false"
+               name="inspectionDate"
+               [(ngModel)]="detail.auditDate"
+               #dateModel="ngModel"
+               [disabled]="detail.id != null"
+               aria-label="Inspection Date"
+               matInput required>
+      </mat-form-field>
+      <div
+           *ngIf="!dateModel?.valid && (dateModel?.dirty || dateModel?.touched)">
+
+        <div *ngIf="dateModel?.errors?.required" style="margin-left: 5px; color: red;">
+          {{ "validations.required" | translate }}
+        </div>
+        <div *ngIf="dateModel?.errors?.pattern" style="margin-left: 5px; color: red;">
+          Contact Number Should be 10 Digit
+        </div>
+      </div>
+
+      <mat-form-field *ngIf="detail.id != null">
+        <mat-label>Number Of Deficiency Found</mat-label>
+        <input matInput placeholder="Number Of Deficiency Found" type="number" positivenumbers
+               min="0" [(ngModel)]="detail.noOfDeficienciesFound" name="noOfDeficiencyFound"
+               required />
+        <mat-error *ngIf="editForm.controls.errors?.required">
+          {{ 'validations.required' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="detail.id != null">
+        <mat-label>Number Of Deficiency completed</mat-label>
+        <input matInput placeholder="Number Of Deficiency completed" type="number" positivenumbers
+               min="0" [(ngModel)]="detail.noOfDeficienciesCompleted" name="noOfDeficiencyComplted"
+               required />
+        <mat-error *ngIf="editForm.controls.errors?.required">
+          {{ 'validations.required' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="detail.id != null">
+        <mat-label>Form S Status</mat-label>
+        <mat-select name="isFormSComplete" [(ngModel)]="detail.isFormSStatus" required>
+          <mat-option>-- None --</mat-option>
+          <mat-option value="INPROGRESS">Inprogress</mat-option>
+          <mat-option value="INREVIEW">Review</mat-option>
+          <mat-option value="DEFECIENCIES">Deficences Found</mat-option>
+          <mat-option value="COMPLETED">Completed</mat-option>
+        </mat-select>
+        <mat-error *ngIf="editForm.controls.errors?.required">
+          {{ 'validations.required' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="detail.id != null">
+        <mat-label>Annexure ABC Status</mat-label>
+        <mat-select name="isAnnexureComplete" [(ngModel)]="detail.isAnnexureStatus" required>
+          <mat-option>-- None --</mat-option>
+          <mat-option value="INPROGRESS">Inprogress</mat-option>
+          <mat-option value="INREVIEW">Review</mat-option>
+          <mat-option value="DEFECIENCIES">Deficences Found</mat-option>
+          <mat-option value="COMPLETED">Completed</mat-option>
+        </mat-select>
+        <mat-error *ngIf="editForm.controls.errors?.required">
+          {{ 'validations.required' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="detail.id != null">
+        <mat-label>Rate Regulation Status</mat-label>
+        <mat-select name="isRateRegulationComplete" [(ngModel)]="detail.isRateRegulationStatus"
+                    required>
+          <mat-option>-- None --</mat-option>
+          <mat-option value="INPROGRESS">Inprogress</mat-option>
+          <mat-option value="INREVIEW">Review</mat-option>
+          <mat-option value="DEFECIENCIES">Deficences Found</mat-option>
+          <mat-option value="COMPLETED">Completed</mat-option>
+        </mat-select>
+        <mat-error *ngIf="editForm.controls.errors?.required">
+          {{ 'validations.required' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="detail.id != null">
+        <mat-label>Oxygen Monitoring Status</mat-label>
+        <mat-select name="isOxygenMonitoringComplete" [(ngModel)]="detail.isOxygenMonitoringStatus"
+                    required>
+          <mat-option>-- None --</mat-option>
+          <mat-option value="INPROGRESS">Inprogress</mat-option>
+          <mat-option value="INREVIEW">Review</mat-option>
+          <mat-option value="DEFECIENCIES">Deficences Found</mat-option>
+          <mat-option value="COMPLETED">Completed</mat-option>
+        </mat-select>
+        <mat-error *ngIf="editForm.controls.errors?.required">
+          {{ 'validations.required' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="detail.id != null">
+        <mat-label>Audit Status</mat-label>
+        <mat-select name="isAuditComplete" [(ngModel)]="detail.auditStatus" required>
+          <mat-option>-- None --</mat-option>
+          <mat-option value="INPROGRESS">Inprogress</mat-option>
+          <mat-option value="INREVIEW">Review</mat-option>
+          <mat-option value="DEFECIENCIES">Deficences Found</mat-option>
+          <mat-option value="COMPLETED">Completed</mat-option>
+        </mat-select>
+        <mat-error *ngIf="editForm.controls.errors?.required">
+          {{ 'validations.required' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <mat-label>Remark</mat-label>
+        <input
+               matInput
+               placeholder="Remark"
+               name="comment"
+               [(ngModel)]="detail.remark"
+               required />
+        <mat-error *ngIf="editForm.controls.errors?.required">
+          {{ 'validations.required' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+
+      <div *ngIf = "detail.auditStatus == 'INREVIEW' || detail.auditStatus == 'COMPLETED'">
+        <span style="color: red;"> NOTE: You can not update the Audit once submitted with audit status {{detail.auditStatus}}".</span>
+        <div>
+          &nbsp;
+        </div>
+      </div>
+
+    </form>
+    <button mat-raised-button color="primary" class="m-t-8" (click)="save()"
+            [disabled]="editForm.form.invalid || isSaving"> Save</button>&nbsp;&nbsp; &nbsp;&nbsp;
+    <button mat-raised-button mat-dialog-close
+            color="warn" class="m-t-8" [disabled]="isSaving"> Cancel
+    </button>
+    &nbsp;&nbsp;
+  </div>
+</div> -->
+
+<div fxLayout="row wrap" class="matero-row">
+  <div fxFlex="100" class="matero-col">
+    <mat-card-title>{{data != null ? 'Update Audit':'Add New Audit'}}</mat-card-title>
+    <form name="caseForm" role="form" class="form-field-full" novalidate (ngSubmit)="save()"
+          #caseForm="ngForm">
+      <mat-form-field>
+        <mat-label>Case No</mat-label>
+        <input matInput placeholder="Number Of Deficiency Found" type="number" positivenumbers
+               min="0" [(ngModel)]="detail.caseNo" name="caseNo"
+               required />
+        <mat-error *ngIf="caseForm.controls.errors?.required">
+          {{ 'validations.required' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Project Name</mat-label>
+        <input matInput placeholder="Project Name" type="text"
+               name="auditorname"
+               min="0" [(ngModel)]="detail.projectName" required />
+        <mat-error *ngIf="caseForm.controls.errors?.required">
+          {{ 'validations.required' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Accuser Name</mat-label>
+        <input matInput placeholder="Accuser Name" type="text"
+               name="accuserName"
+
+               min="0" [(ngModel)]="detail.accuserName" required />
+        <mat-error *ngIf="caseForm.controls.errors?.required">
+          {{ 'validations.required' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Court Name</mat-label>
+        <input matInput placeholder="Court Name" type="text"
+               name="courtName"
+
+               min="0" [(ngModel)]="detail.courtName" required />
+        <mat-error *ngIf="caseForm.controls.errors?.required">
+          {{ 'validations.required' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Total Claim Amount</mat-label>
+        <input matInput placeholder="Total Claim Amount" type="text"
+               name="totalClaimAmount"
+
+               min="0" [(ngModel)]="detail.totalClaimAmount" required />
+        <mat-error *ngIf="caseForm.controls.errors?.required">
+          {{ 'validations.required' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Case Officer</mat-label>
+        <input matInput placeholder="Case Officer" type="text"
+               name="caseOfficer"
+
+               min="0" [(ngModel)]="detail.caseOfficer" required />
+        <mat-error *ngIf="caseForm.controls.errors?.required">
+          {{ 'validations.required' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-placeholder>Next Hearing Date</mat-placeholder>
+        <mat-datetimepicker-toggle [for]="datetimePicker" matSuffix></mat-datetimepicker-toggle>
+        <mat-datetimepicker #datetimePicker openOnFocus="true" startView="month" timeInterval="5"
+                            type="datetime"></mat-datetimepicker>
+        <input [matDatetimepicker]="datetimePicker"
+               autocomplete="false"
+               name="nextHearingDate"
+               [(ngModel)]="detail.nextHearingDate"
+               #dateModel="ngModel"
+               aria-label="Next Hearing Date"
+               matInput required>
+      </mat-form-field>
+      <div
+           *ngIf="!dateModel?.valid && (dateModel?.dirty || dateModel?.touched)">
+
+        <div *ngIf="dateModel?.errors?.required" style="margin-left: 5px; color: red;">
+          {{ "validations.required" | translate }}
+        </div>
+        <div *ngIf="dateModel?.errors?.pattern" style="margin-left: 5px; color: red;">
+          Invalid Date
+        </div>
+      </div>
+
+
+    </form>
+    <button mat-raised-button color="primary" class="m-t-8" (click)="save()"
+            [disabled]="caseForm.form.invalid || isSaving"> Save</button>&nbsp;&nbsp; &nbsp;&nbsp;
+    <button mat-raised-button mat-dialog-close
+            color="warn" class="m-t-8" [disabled]="isSaving"> Cancel
+    </button>
+    &nbsp;&nbsp;
+  </div>
+</div>

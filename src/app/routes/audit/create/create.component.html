@@ -1,0 +1,89 @@
+<div fxLayout="row wrap" class="matero-row">
+  <div fxFlex="50" class="matero-col">
+    <mat-card>
+      <mat-card-title>Add Audit</mat-card-title>
+      <form name="editForm" role="form" class="form-field-full" novalidate (ngSubmit)="save()"
+            #editForm="ngForm">
+        <mat-form-field>
+          <mat-label>Audit Type</mat-label>
+          <mat-select name="auditTypeId" [(ngModel)]="detail.auditTypeId" required
+                      [disabled]="detail.id !=null">
+            <mat-option>-- None --</mat-option>
+            <mat-option *ngFor="let list of auditTypeLOV" [value]="list.id">
+              {{ list.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="editForm.controls.auditTypeId?.errors?.required">
+            {{ 'validations.required' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>No. Of Deficiencies</mat-label>
+          <input matInput placeholder="No. Of Deficiencies" type="number" name="defectCount"
+                 [(ngModel)]="detail.defectCount" positivenumbers required />
+          <mat-error *ngIf="editForm.controls.defectCount?.errors?.required">
+            {{ 'validations.required' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>No. Of Deficiencies Completed</mat-label>
+          <input matInput placeholder="No. Of Deficiencies Completed" type="number"
+                 name="defectFixCount"
+                 [(ngModel)]="detail.defectFixCount" positivenumbers
+                 required />
+          <mat-error *ngIf="editForm.controls.defectFixCount?.errors?.required">
+            {{ 'validations.required' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Inspection Date</mat-label>
+          <input matInput name="inspectionDate"
+                 [matDatepicker]="datePicker"
+                 [(ngModel)]="detail.inspectionDate"
+                 #dateModel="ngModel"
+                 required
+                 aria-label="Inspection Date">
+          <mat-datepicker-toggle matSuffix [for]="datePicker" matSuffix></mat-datepicker-toggle>
+          <mat-datepicker #datePicker openOnFocus="true" type="date"></mat-datepicker>
+          <mat-error *ngIf="dateModel.hasError('required')">
+            Please choose a date.
+          </mat-error>
+          <mat-error *ngIf="dateModel.hasError('matDatepickerMin')">
+            Please choose a later date.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Remarks</mat-label>
+          <input matInput placeholder="Remarks" name="remark" [(ngModel)]="detail.remark"
+                 maxlength="255" rows="5"/>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Audit Status</mat-label>
+          <mat-select name="status"
+                      [(ngModel)]="detail.status"
+                      required>
+            <mat-option>-- None --</mat-option>
+            <mat-option value="Inproggess">Inprogress</mat-option>
+            <mat-option value="Complete">Complete</mat-option>
+          </mat-select>
+          <mat-error *ngIf="editForm.controls.staCtus?.errors?.required">
+            {{ 'validations.required' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </form>
+
+      <button mat-raised-button color="primary" class="m-t-8" (click)="save()"
+              [disabled]="editForm.form.invalid || isSaving">
+        Save</button>&nbsp;&nbsp;
+
+      <button mat-raised-button color="warn" class="m-t-8" (click)="previousState()"
+              [disabled]="isSaving">
+        Cancel
+      </button>
+
+      &nbsp;&nbsp;
+    </mat-card>
+  </div>
+</div>

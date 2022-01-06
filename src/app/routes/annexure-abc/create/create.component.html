@@ -1,0 +1,92 @@
+<page-header></page-header>
+
+<mat-card class="example-card">
+
+    <mat-card-header>
+      <mat-card-title>Annexure A,B,C</mat-card-title>
+      <mat-card-subtitle
+        >Technical Specification certification to be filled up by a qualified biomedical
+        engineer</mat-card-subtitle
+      >
+    </mat-card-header>
+
+  <mat-card-content>
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm" novalidate>
+      <mat-vertical-stepper linear>
+        <mat-step #sectionA="ngModelGroup" ngModelGroup="sectionA" [completed]="sectionA.valid">
+          <ng-template matStepLabel>A. JUMBO OXYGEN SYSTEM </ng-template>
+          <mat-label i18n fxFlex="100"
+            >The form should be filled and submitted for each installed controlled panel separately
+          </mat-label>
+          &nbsp;
+          <h3>1. Oxygen Manifold Supply System</h3>
+          <app-questionnaire [crudOperation]="crudOperation" [search]="{ 'formName.contains': 'AnnexureABC', 'type.equals': 'A', 'subType.equals': 'Oxygen Manifold Supply System' }"></app-questionnaire>
+          <h3>2. Oxygen Manifold Control System</h3>
+          <app-questionnaire [crudOperation]="crudOperation" [search]="{ 'formName.contains': 'AnnexureABC', 'type.equals': 'A', 'subType.equals': 'Oxygen Manifold Control System' }"></app-questionnaire>
+          <h3>3. Emergency O2 Manifold</h3>
+          <app-questionnaire [crudOperation]="crudOperation" [search]="{ 'formName.contains': 'AnnexureABC', 'type.equals': 'A', 'subType.equals': 'Emergency O2 Manifold' }"></app-questionnaire>
+        </mat-step>
+
+        <mat-step #sectionB="ngModelGroup" ngModelGroup="sectionB" [completed]="sectionB.valid">
+          <ng-template matStepLabel>B.	OXYGEN PIPING AND OXYGEN POINTS</ng-template>
+          &nbsp;
+          <h3>1.	Line Isolation Valves (Medical Gas Valves)</h3>
+          <app-questionnaire [crudOperation]="crudOperation" [search]="{ 'formName.contains': 'AnnexureABC', 'type.equals': 'B', 'subType.equals': 'OXYGEN PIPING AND OXYGEN POINTS' }"></app-questionnaire>
+          <h3>2.	Medical Gas Area Line Pressure Alarm</h3>
+          <app-questionnaire [crudOperation]="crudOperation" [search]="{ 'formName.contains': 'AnnexureABC', 'type.equals': 'B', 'subType.equals': 'Medical Gas Area Line Pressure Alarm' }"></app-questionnaire>
+          <h3>3.	Master Alarm Panel</h3>
+          <app-questionnaire [crudOperation]="crudOperation" [search]="{ 'formName.contains': 'AnnexureABC', 'type.equals': 'B', 'subType.equals': 'Master Alarm Panel' }"></app-questionnaire>
+          <h3>4.	Medical Gas Terminal Units (Gas Outlet Points)</h3>
+          <app-questionnaire [crudOperation]="crudOperation" [search]="{ 'formName.contains': 'AnnexureABC', 'type.equals': 'B', 'subType.equals': 'Medical Gas Terminal Units (Gas Outlet Points)' }"></app-questionnaire>
+          <h3>5.	Oxygen Flow Meter with Humidifier Bottle (CE Marked)</h3>
+          <app-questionnaire [crudOperation]="crudOperation" [search]="{ 'formName.contains': 'AnnexureABC', 'type.equals': 'B', 'subType.equals': 'Oxygen Flow Meter with Humidifier Bottle (CE Marked)' }"></app-questionnaire>
+          <h3>6.	Copper Pipes</h3>
+          <app-questionnaire [crudOperation]="crudOperation" [search]="{ 'formName.contains': 'AnnexureABC', 'type.equals': 'B', 'subType.equals': 'Copper Pipes' }"></app-questionnaire>
+          <h3>7.	Oxygen Flow Meter</h3>
+          <app-questionnaire [crudOperation]="crudOperation" [search]="{ 'formName.contains': 'AnnexureABC', 'type.equals': 'B', 'subType.equals': 'Oxygen Flow Meter' }"></app-questionnaire>
+        </mat-step>
+
+        <mat-step #sectionC="ngModelGroup" ngModelGroup="sectionC" [completed]="sectionC.valid">
+          <ng-template matStepLabel>C.	LIQUID MEDICAL OXYGEN TANK</ng-template>
+          &nbsp;
+          <h3>1.	Liquid Medical Oxygen Tank </h3>
+          <app-questionnaire   [crudOperation]="crudOperation"  [search]=" { 'formName.contains': 'AnnexureABC', 'type.equals': 'C', 'subType.equals': 'Liquid Medical Oxygen Tank' }"></app-questionnaire>
+          <h3>2.	Accessories </h3>
+          <app-questionnaire  [crudOperation]="crudOperation"  [search]=" { 'formName.contains': 'AnnexureABC', 'type.equals': 'C', 'subType.equals': 'Accessories' }"></app-questionnaire>
+          <h3>3.	Safety Fitting </h3>
+          <app-questionnaire  [crudOperation]="crudOperation"  [search]=" { 'formName.contains': 'AnnexureABC', 'type.equals': 'C', 'subType.equals': 'Safety Fitting' }"></app-questionnaire>
+          <h3>4.	Submittals </h3>
+          <app-questionnaire  [crudOperation]="crudOperation"  [search]=" { 'formName.contains': 'AnnexureABC', 'type.equals': 'C', 'subType.equals': 'Submittals' }"></app-questionnaire>
+          <h3>5.	Liquid Oxygen Supply System </h3>
+          <app-questionnaire  [crudOperation]="crudOperation"  [search]=" { 'formName.contains': 'AnnexureABC', 'type.equals': 'C', 'subType.equals': 'Liquid Oxygen Supply System' }"></app-questionnaire>
+          <h3>6.	Product and Service Specification </h3>
+          <app-questionnaire  [crudOperation]="crudOperation"  [search]=" { 'formName.contains': 'AnnexureABC', 'type.equals': 'C', 'subType.equals': 'Product and Service Specification' }"></app-questionnaire>
+          <h3>7.	Specification of Components </h3>
+          <app-questionnaire  [crudOperation]="crudOperation"  [search]=" { 'formName.contains': 'AnnexureABC', 'type.equals': 'C', 'subType.equals': 'Specification of Components' }"></app-questionnaire>
+          <h3>8.	Storage Tank Specifications </h3>
+          <app-questionnaire  [crudOperation]="crudOperation"  [search]=" { 'formName.contains': 'AnnexureABC', 'type.equals': 'C', 'subType.equals': 'Storage Tank Specifications' }"></app-questionnaire>
+          <h3>9.	Storage Tank Capacity </h3>
+          <app-questionnaire  [crudOperation]="crudOperation"  [search]=" { 'formName.contains': 'AnnexureABC', 'type.equals': 'C', 'subType.equals': 'Storage Tank Capacity' }"></app-questionnaire>
+          <h3>10.	Vaporiser Coil </h3>
+          <app-questionnaire [crudOperation]="crudOperation"  [search]=" { 'formName.contains': 'AnnexureABC', 'type.equals': 'C', 'subType.equals': 'Vaporiser Coil' }"></app-questionnaire>
+          <h3>11.	Safety </h3>
+          <app-questionnaire [crudOperation]="crudOperation"  [search]=" { 'formName.contains': 'AnnexureABC', 'type.equals': 'C', 'subType.equals': 'Safety' }"></app-questionnaire>
+          <h3>12.	Statutory Requirements  </h3>
+          <app-questionnaire [crudOperation]="crudOperation"  [search]=" { 'formName.contains': 'AnnexureABC', 'type.equals': 'C', 'subType.equals': 'Statutory Requirements' }"></app-questionnaire>
+          <h3>13.	Maintenance </h3>
+          <app-questionnaire [crudOperation]="crudOperation"  [search]=" { 'formName.contains': 'AnnexureABC', 'type.equals': 'C', 'subType.equals': 'Maintenance' }"></app-questionnaire>
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel>Submit To Auditor For Review</ng-template>
+          <div>
+            <button mat-raised-button type="button" (click)="openDialog()" color="primary">
+              Submit For Review
+            </button>
+          </div>
+        </mat-step>
+      </mat-vertical-stepper>
+    </form>
+    <!-- <pre>{{ f.value | json }}</pre> -->
+  </mat-card-content>
+</mat-card>

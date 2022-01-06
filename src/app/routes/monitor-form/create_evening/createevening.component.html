@@ -1,0 +1,362 @@
+<div fxLayout="row wrap" class="matero-row">
+  <div fxFlex="100" class="matero-col">
+    <mat-card-title>{{ 'Enter the details for Monitor Form 6 PM to 6 AM' }}</mat-card-title>
+
+    <form
+      name="editForm"
+      role="form"
+      class="form-field-full"
+      (ngSubmit)="save()"
+      #editForm="ngForm"
+    >
+       <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+        <mat-form-field appearance="outline" fxFlex="50">
+          <mat-label>Ward No.</mat-label>
+          <input
+          type="number" positivenumbers
+            placeholder="Ward No."
+            matInput
+            name="wardNo"
+            minlength="1" maxlength="150"
+            min="0"
+            [(ngModel)]="monitorpm.wardNo" required [readOnly]="readOnly"
+            />
+            <mat-error *ngIf="editForm.controls.wardNo?.errors?.required">
+            {{'validations.required' | translate}}</mat-error>
+         </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+        <mat-form-field appearance="outline" fxFlex="50">
+          <mat-label>Patient Name</mat-label>
+          <input  type="text"
+          id="patientName"
+          pattern="^([a-zA-Z]+\s)*[a-zA-Z]+$"
+          minlength="2" maxlength="150"
+          placeholder="Patient Name" matInput name="patientName" [(ngModel)]="monitorpm.patientName" required [readOnly]="readOnly"
+          #patientName="ngModel" />
+
+        </mat-form-field>
+        <div
+             *ngIf="!patientName?.valid && (patientName?.dirty || patientName?.touched)">
+          <div *ngIf="patientName?.errors?.required"
+               style="margin-left: 5px; color: red;">
+            {{ "validations.required" | translate }}
+          </div>
+          <div *ngIf="patientName?.errors?.pattern"
+               style="margin-left: 5px; color: red;">
+               Enter only alphabets
+          </div>
+        </div>
+
+        <mat-form-field  appearance="outline" fxFlex="50">
+          <mat-label>Bed No</mat-label>
+          <input
+          type="number" positivenumbers
+            placeholder="Bed No"
+            matInput
+            name="bedNo" type="number" positivenumbers
+            minlength="2" maxlength="150"
+            min="0"
+            [(ngModel)]="monitorpm.bedNo" required [readOnly]="readOnly"
+          />
+           <mat-error *ngIf="editForm.controls.bedNo?.errors?.required">
+             {{'validations.required' | translate}} only numbers are allowed</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+        <mat-form-field fxFlex="50" appearance="outline">
+          <mat-label>Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker1"
+            placeholder=" Date"
+            name="dateOfAdmission"
+            [(ngModel)]="monitorpm.dateOfAdmission"
+            [max]="maxDate"
+            i18n-placeholder
+            required
+          />
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker touchUi="true" #picker1></mat-datepicker>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline" fxFlex="50">
+          <mat-label>Type of oxygen</mat-label>
+          <mat-select disableRipple name="oxygenType" [(ngModel)]="monitorpm.oxygenType" [disabled]="readOnly" required>
+            <mat-option value="O2">O2</mat-option>
+            <mat-option value="NRBM">NRBM</mat-option>
+            <mat-option value="NIV">NIV</mat-option>
+            <mat-option value="Intub">Intub</mat-option>
+          </mat-select>
+           <mat-error *ngIf="editForm.controls.oxygenType?.errors?.required">
+           {{'validations.required' | translate}} select the valid option</mat-error>
+        </mat-form-field>
+      </div>
+
+
+
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+        <mat-form-field  appearance="outline" fxFlex="50">
+          <mat-label>6-8 PM</mat-label>
+          <input
+          type="number" positivenumbers
+          minlength="2" maxlength="150"
+          min="0"
+            placeholder="6-8 PM"
+            matInput
+            name="sixToEightPM"
+            [(ngModel)]="monitorpm.sixToEightPM" required [readOnly]="readOnly"
+          />
+          <mat-error *ngIf="editForm.controls.sixToEightPM?.errors?.required">
+            {{'validations.required' | translate}} only numbers are allowed</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" fxFlex="50">
+          <mat-label>O2 in L/min(FiO2)</mat-label>
+          <input
+          type="number" positivenumbers
+          minlength="2" maxlength="150"
+          min="0"
+            placeholder="O2 in L/min(FiO2)"
+            name="oxySixToEightPM"
+            matInput
+            [(ngModel)]="monitorpm.oxySixToEightPM" required [readOnly]="readOnly"
+          />
+          <mat-error *ngIf="editForm.controls.oxySixToEightPM?.errors?.required">
+            {{'validations.required' | translate}} only numbers are allowed</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+        <mat-form-field  appearance="outline" fxFlex="50">
+          <mat-label>8-10 PM</mat-label>
+          <input
+          type="number" positivenumbers
+          minlength="2" maxlength="150"
+          min="0"
+            placeholder="8-10 PM"
+            matInput
+            name="eightToTenPM"
+            [(ngModel)]="monitorpm.eightToTenPM" required [readOnly]="readOnly"
+          />
+          <mat-error *ngIf="editForm.controls.eightToTenPM?.errors?.required">
+            {{'validations.required' | translate}} only numbers are allowed</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" fxFlex="50">
+          <mat-label>O2 in L/min(FiO2)</mat-label>
+          <input
+          type="number" positivenumbers
+          minlength="2" maxlength="150"
+          min="0"
+            placeholder="O2 in L/min(FiO2)"
+            name="oxyEightToTenPM"
+            matInput
+            [(ngModel)]="monitorpm.oxyEightToTenPM" required [readOnly]="readOnly"
+          />
+          <mat-error *ngIf="editForm.controls.oxyEightToTenPM?.errors?.required">
+            {{'validations.required' | translate}} only numbers are allowed</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+        <mat-form-field  appearance="outline" fxFlex="50">
+          <mat-label>10-12 midnight</mat-label>
+          <input
+          type="number" positivenumbers
+          minlength="2" maxlength="150"
+          min="0"
+
+            placeholder="10-12 midnight"
+            matInput
+            name="tenToTwelvePM"
+            [(ngModel)]="monitorpm.tenToTwelvePM" required [readOnly]="readOnly"
+          />
+          <mat-error *ngIf="editForm.controls.tenToTwelvePM?.errors?.required">
+            {{'validations.required' | translate}} only numbers are allowed</mat-error>
+        </mat-form-field>
+
+         <mat-form-field appearance="outline" fxFlex="50">
+          <mat-label>O2 in L/min(FiO2)</mat-label>
+          <input
+          type="number" positivenumbers
+          minlength="2" maxlength="150"
+          min="0"
+
+            placeholder="O2 in L/min(FiO2)"
+            name="oxyTenToTwelvePM"
+            matInput
+            [(ngModel)]="monitorpm.oxyTenToTwelvePM" required [readOnly]="readOnly"
+          />
+          <mat-error *ngIf="editForm.controls.oxyTenToTwelvePM?.errors?.required">
+            {{'validations.required' | translate}} only numbers are allowed</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+        <mat-form-field appearance="outline" fxFlex="50">
+          <mat-label>12-2 AM</mat-label>
+          <input
+          type="number" positivenumbers
+          minlength="2" maxlength="150"
+          min="0"
+
+            placeholder="12-2 AM"
+            matInput
+            name="twelveToTwoAM"
+            [(ngModel)]="monitorpm.twelveToTwoAM" required [readOnly]="readOnly"
+          />
+          <mat-error *ngIf="editForm.controls.twelveToTwoAM?.errors?.required">
+            {{'validations.required' | translate}} only numbers are allowed</mat-error>
+        </mat-form-field>
+
+        <mat-form-field  appearance="outline" fxFlex="50">
+          <mat-label>O2 in L/min(FiO2)</mat-label>
+          <input
+          type="number" positivenumbers
+          minlength="2" maxlength="150"
+          min="0"
+
+            placeholder="O2 in L/min(FiO2)"
+            name="oxyTwelveToTwoAM"
+            matInput
+            [(ngModel)]="monitorpm.oxyTwelveToTwoAM" required [readOnly]="readOnly"
+          />
+          <mat-error *ngIf="editForm.controls.oxyTwelveToTwoAM?.errors?.required">
+            {{'validations.required' | translate}} only numbers are allowed</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+        <mat-form-field appearance="outline" fxFlex="50">
+          <mat-label>2-4 AM</mat-label>
+          <input
+          type="number" positivenumbers
+          minlength="2" maxlength="150"
+          min="0"
+
+            placeholder="2-4 AM"
+            matInput
+            name="twoToFourAM"
+            [(ngModel)]="monitorpm.twoToFourAM" required [readOnly]="readOnly"
+          />
+          <mat-error *ngIf="editForm.controls.twoToFourAM?.errors?.required">
+            {{'validations.required' | translate}} only numbers are allowed</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" fxFlex="50">
+          <mat-label>O2 in L/min(FiO2)</mat-label>
+          <input
+          type="number" positivenumbers
+          minlength="2" maxlength="150"
+          min="0"
+            placeholder="O2 in L/min(FiO2)"
+            name="oxyTwoToFourAM"
+            matInput
+            [(ngModel)]="monitorpm.oxyTwoToFourAM" required [readOnly]="readOnly"
+          /><mat-error *ngIf="editForm.controls.oxyTwoToFourAM?.errors?.required">
+            {{'validations.required' | translate}} only numbers are allowed</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+        <mat-form-field  appearance="outline" fxFlex="50">
+          <mat-label>4-6 AM</mat-label>
+          <input
+          type="number" positivenumbers
+          minlength="2" maxlength="150"
+          min="0"
+            placeholder="4-6 AM"
+            matInput
+            name="fourToSixAM"
+            [(ngModel)]="monitorpm.fourToSixAM" required [readOnly]="readOnly"
+          />
+          <mat-error *ngIf="editForm.controls.fourToSixAM?.errors?.required">
+            {{'validations.required' | translate}} only numbers are allowed</mat-error>
+        </mat-form-field>
+
+        <mat-form-field  appearance="outline" fxFlex="50">
+          <mat-label>O2 in L/min(FiO2)</mat-label>
+          <input
+          type="number" positivenumbers
+          minlength="2" maxlength="150"
+          min="0"
+
+            placeholder="O2 in L/min(FiO2)"
+            name="oxyFourToSixAM"
+            matInput
+            [(ngModel)]="monitorpm.oxyFourToSixAM" required [readOnly]="readOnly"
+          />
+          <mat-error *ngIf="editForm.controls.oxyFourToSixAM?.errors?.required">
+            {{'validations.required' | translate}} only numbers are allowed</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+        <mat-form-field appearance="outline" fxFlex="50">
+          <mat-label>Dr Name</mat-label>
+          <input  type="text"
+          id="drName"
+          pattern="^([a-zA-Z]+\s)*[a-zA-Z]+$"
+          minlength="2" maxlength="150"
+          placeholder="Dr Name" matInput name="drName" [(ngModel)]="monitorpm.drName" required [readOnly]="readOnly"
+          #drName="ngModel" />
+
+        </mat-form-field>
+        <div
+             *ngIf="!drName?.valid && (drName?.dirty || drName?.touched)">
+          <div *ngIf="drName?.errors?.required"
+               style="margin-left: 5px; color: red;">
+            {{ "validations.required" | translate }}
+          </div>
+          <div *ngIf="drName?.errors?.pattern"
+               style="margin-left: 5px; color: red;">
+               Enter only alphabets
+          </div>
+        </div>
+
+        <mat-form-field appearance="outline" fxFlex="50">
+          <mat-label>Nurse Name</mat-label>
+          <input  type="text"
+          id="nurseName"
+          pattern="^([a-zA-Z]+\s)*[a-zA-Z]+$"
+          minlength="2" maxlength="150"
+          placeholder="Nurse Name" matInput name="nurseName" [(ngModel)]="monitorpm.nurseName" required [readOnly]="readOnly"
+          #nurseName="ngModel" />
+
+        </mat-form-field>
+        <div
+             *ngIf="!nurseName?.valid && (nurseName?.dirty || nurseName?.touched)">
+          <div *ngIf="nurseName?.errors?.required"
+               style="margin-left: 5px; color: red;">
+            {{ "validations.required" | translate }}
+          </div>
+          <div *ngIf="nurseName?.errors?.pattern"
+               style="margin-left: 5px; color: red;">
+               Enter only alphabets
+          </div>
+        </div>
+
+
+      </div>
+
+    </form>
+    <div mat-dialog-actions align="end">
+    <button
+      mat-raised-button
+      color="primary"
+      class="m-t-8"
+      (click)="save()"
+      [disabled]="editForm.form.invalid"
+    >
+      Save</button
+    >&nbsp;&nbsp; &nbsp;&nbsp;
+    <button mat-raised-button mat-dialog-close color="warn" class="m-t-8" [disabled]="isSaving">
+      Cancel
+    </button>
+    </div>
+  </div>
+</div>

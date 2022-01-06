@@ -1,0 +1,122 @@
+<page-header></page-header>
+
+<form
+      name="courtCase"
+      role="form"
+      class="form-field-full">
+
+  <div fxLayout="row wrap" class="matero-row">
+    <div fxFlex="100.67" fxFlex.lt-sm="100" class="matero-col">
+      <mat-card>
+
+        <div class="d-flex" style="padding-left: 20px; background-color: rgb(158, 190, 202);">
+          <h2 class="text-blue"> Hearing Details
+          </h2>
+        </div>
+        &nbsp;
+        <mat-card-content>
+
+          <div fxLayout="row wrap">
+
+            <div fxFlex="50" fxFlex.lt-sm="100">
+              <div class="row">
+                <div class="column"><span style="font-weight:bold"> Accuser Name :</span></div>
+                <div class="column">{{detail.freefield1}}</div>
+              </div>
+            </div>
+
+            <div fxFlex="50" fxFlex.lt-sm="100">
+              <div class="row">
+                <div class="column"><span style="font-weight:bold">Defendant Name :</span></div>
+                <div class="column">{{detail.freefield2}}</div>
+              </div>
+            </div>
+
+          </div> &nbsp;
+
+          <div fxLayout="row wrap">
+
+            <div fxFlex="50" fxFlex.lt-sm="100">
+              <div class="row">
+                <div class="column"><span style="font-weight:bold">Participant Name :</span></div>
+                <div class="column">{{detail.freefield3}}</div>
+              </div>
+            </div>
+
+            <div fxFlex="50" fxFlex.lt-sm="100">
+              <div class="row">
+                <div class="column"><span style="font-weight:bold">Hearing Date :</span></div>
+                <div class="column">{{detail.hearingDate | date: 'shortDate'}}</div>
+              </div>
+            </div>
+
+          </div> &nbsp;
+
+          <div fxLayout="row wrap">
+
+            <div fxFlex="50" fxFlex.lt-sm="100">
+              <div class="row">
+                <div class="column"><span style="font-weight:bold">Hearing Status :</span></div>
+                <div class="column"> {{detail.status}}</div>
+              </div>
+            </div>
+
+            <div fxFlex="50" fxFlex.lt-sm="100">
+              <div class="row" fxLayoutGap="30px">
+                <div class="column"><span style="font-weight:bold">Comment :</span></div>
+                <div class="column">{{detail.comment}}</div>
+              </div>
+            </div>
+
+          </div>&nbsp;
+
+          <div fxLayout="row wrap">
+
+            <div fxFlex="50" fxFlex.lt-sm="100">
+              <div class="row">
+                <div class="column"><span style="font-weight:bold">Hearing Conclusion :</span></div>
+                <div class="column"> {{detail.conclusion}}</div>
+              </div>
+            </div>
+
+            <div fxFlex="50" fxFlex.lt-sm="100">
+              <div class="row" fxLayoutGap="30px">
+                <div class="column"><span style="font-weight:bold">Next Hearing Date :</span> </div>
+                <div class="column">{{detail.nextHearingDate | date: 'shortDate' }}</div>
+              </div>
+            </div>
+
+          </div>&nbsp;
+
+          <div fxLayout="row wrap">
+
+            <div fxFlex="50" fxFlex.lt-sm="100">
+              <div class="row">
+                <div class="column"><span style="font-weight:bold">Previous Hearing Date :</span>
+                </div>
+                <div class="column"> {{detail.previousHearingDate}}</div>
+              </div>
+            </div>
+
+            <div fxFlex="50" fxFlex.lt-sm="100">
+              <!-- <div class="row" fxLayoutGap="30px">
+                <div class="column">Next Hearing Date :</div>
+                <div class="column">{{detail.nextHearingDate | date: 'shortDate' }}</div>
+              </div> -->
+            </div>
+
+          </div>&nbsp;
+
+        </mat-card-content>
+
+        <!-- &nbsp;
+        <div class="d-flex" style="padding-left: 20px; background-color: rgb(158, 190, 202);">
+          <h2 class="text-blue"> Hearing Details
+          </h2>
+        </div>
+        &nbsp; -->
+
+      </mat-card>
+    </div>
+  </div>
+</form>

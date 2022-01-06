@@ -1,0 +1,831 @@
+<form
+      name="editForm"
+      role="form"
+      novalidate
+      (ngSubmit)="save()"
+      #editForm="ngForm"
+      class="form-field-full">
+  <div fxLayout="row wrap" class="matero-row">
+    <div fxFlex="100" class="matero-col">
+      <mat-card>
+        <!-- <mat-card-title>{{ detail.id != null ? 'Edit' : 'Create' }} Hospital </mat-card-title> -->
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="30" fxFlex.lt-sm="100">
+            <h4>1. Fire Audit of Hospital has been done?</h4>
+          </div>
+          <div fxFlex="70" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>Fire Audit of Hospital has been done Or Not</mat-label>
+                <mat-select  name="fireAuditDoneOrnot"
+                            [(value)]="detail.fireAuditDoneOrnot"
+                             [disabled]="crudOperation=='view'" required>
+                  <mat-option value="true">YES</mat-option>
+                  <mat-option value="false">NO</mat-option>
+                </mat-select>
+                <mat-error *ngIf="editForm.controls.fireAuditDoneOrnot?.errors?.required">
+                  {{ 'validations.required' | translate }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="20" fxFlex.lt-sm="100">
+            <mat-label>If yes Pls.mention Date of fire Audit</mat-label>
+          </div>
+          <div fxFlex="80" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>fire Audit Date</mat-label>
+                <input matInput name="fireAuditDate"
+                       [matDatepicker]="datePicker"
+                       [(ngModel)]="detail.fireAuditDate"
+                       #dateModel="ngModel"
+                       [max]="today"
+                       required
+                       aria-label="Inspection Date"
+                       [disabled]="crudOperation == 'view'">
+                <mat-datepicker-toggle matSuffix [for]="datePicker" matSuffix>
+                </mat-datepicker-toggle>
+                <mat-datepicker #datePicker openOnFocus="true" type="date"></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div
+                 *ngIf="!dateModel?.valid && (dateModel?.dirty || dateModel?.touched)">
+
+              <div *ngIf="dateModel?.errors?.required"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.required" | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="20" fxFlex.lt-sm="100">
+            <mat-label>Faults found (if any)</mat-label>
+          </div>
+          <div fxFlex="80" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>Faults found (if any)</mat-label>
+                <textarea
+                       matInput
+                       name="fireFaults"
+                       pattern="^[a-zA-Z0-9\s.,]{1,500}$"
+                       minlength="1"
+                       maxlength="500"
+                       [(ngModel)]="detail.fireFaults"
+                       #fireFaults="ngModel"
+                       [readonly]="crudOperation == 'view'"
+                      ></textarea>
+              </mat-form-field>
+            </div>
+            <div *ngIf="!fireFaults?.valid && (fireFaults?.dirty || fireFaults?.touched)">
+              <div *ngIf="fireFaults?.errors?.required"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.required" | translate }}
+              </div>
+              <div *ngIf="fireFaults?.errors?.pattern"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.pattern" | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="20" fxFlex.lt-sm="100">
+            <mat-label>Corrective action taken</mat-label>
+          </div>
+          <div fxFlex="80" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>Corrective action taken</mat-label>
+                <textarea
+                       matInput
+                       name="fireCorrectiveAction"
+                       pattern="^[a-zA-Z0-9\s.,]{1,500}$"
+                       minlength="1"
+                       maxlength="500"
+                       [(ngModel)]="detail.fireCorrectiveAction"
+                       #fireCorrectiveAction="ngModel"
+                       [readonly]="crudOperation=='view'"
+                        ></textarea>
+              </mat-form-field>
+            </div>
+            <div
+                 *ngIf="!fireCorrectiveAction?.valid && (fireCorrectiveAction?.dirty || fireCorrectiveAction?.touched)">
+              <div *ngIf="fireCorrectiveAction?.errors?.required"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.required" | translate }}
+              </div>
+              <div *ngIf="fireCorrectiveAction?.errors?.pattern"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.pattern" | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="20" fxFlex.lt-sm="100">
+            <mat-label>If No audit done, please mention What is the Plan for Audit?</mat-label>
+          </div>
+          <div fxFlex="80" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>If No audit done, please mention What is the Plan for Audit?</mat-label>
+                <textarea
+                       matInput
+                       name="fireAuditPlan"
+                       pattern="^[a-zA-Z0-9\s.,]{1,500}$"
+                       minlength="1"
+                       maxlength="500"
+                       #fireAuditPlan="ngModel"
+                       [(ngModel)]="detail.fireAuditPlan"
+                       [readonly]="crudOperation == 'view'"  ></textarea>
+              </mat-form-field>
+            </div>
+            <div *ngIf="!fireAuditPlan?.valid && (fireAuditPlan?.dirty || fireAuditPlan?.touched)">
+              <div *ngIf="fireAuditPlan?.errors?.required"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.required" | translate }}
+              </div>
+              <div *ngIf="fireAuditPlan?.errors?.pattern"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.pattern" | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="30" fxFlex.lt-sm="100">
+            <h4>2. Electrical Inspection of Hospital has been done?</h4>
+          </div>
+          <div fxFlex="70" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-select  name="electricalAuditDone"
+                            [(value)]="detail.electricalAuditDone"
+                            [disabled]="crudOperation == 'view'"  required>
+                  <mat-option>None</mat-option>
+                  <mat-option value="true">YES</mat-option>
+                  <mat-option value="false">NO</mat-option>
+                </mat-select>
+                <mat-error *ngIf="editForm.controls.electricalAuditDone?.errors?.required">
+                  {{ 'validations.required' | translate }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="20" fxFlex.lt-sm="100">
+            <mat-label>If yes Pls.mention Date of Electrical Inspection</mat-label>
+          </div>
+          <div fxFlex="80" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>Electrical Inspection Date</mat-label>
+                <input matInput name="electricalAuditDate"
+                       [matDatepicker]="datePicker2"
+                       [(ngModel)]="detail.electricalAuditDate"
+                       #dateModel2="ngModel"
+                       [max]="today"
+                       aria-label="Inspection Date"
+                       [disabled]="crudOperation=='view'">
+                <mat-datepicker-toggle matSuffix [for]="datePicker2" matSuffix>
+                </mat-datepicker-toggle>
+                <mat-datepicker #datePicker2 openOnFocus="true" type="date"></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div *ngIf="!dateModel2?.valid && (dateModel2?.dirty || dateModel2?.touched)">
+              <div *ngIf="dateModel2?.errors?.required"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.required" | translate }}
+              </div>
+              <div *ngIf="dateModel2?.errors?.pattern"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.pattern" | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="20" fxFlex.lt-sm="100">
+            <mat-label>Faults found (if any)</mat-label>
+          </div>
+          <div fxFlex="80" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>Faults found (if any)</mat-label>
+                <input
+                       matInput
+                       name="electricalFaults"
+                       pattern="^[a-zA-Z0-9\s.,]{1,50}$"
+                       minlength="1"
+                       maxlength="150"
+                       #electricalFaults="ngModel"
+                       [(ngModel)]="detail.electricalFaults"
+                       [readonly]="crudOperation == 'view'"
+                        />
+              </mat-form-field>
+            </div>
+            <div
+                 *ngIf="!electricalFaults?.valid && (electricalFaults?.dirty || electricalFaults?.touched)">
+              <div *ngIf="electricalFaults?.errors?.required"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.required" | translate }}
+              </div>
+              <div *ngIf="electricalFaults?.errors?.pattern"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.pattern" | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="20" fxFlex.lt-sm="100">
+            <mat-label>Corrective action taken</mat-label>
+          </div>
+          <div fxFlex="80" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>Corrective action taken</mat-label>
+                <input
+                       matInput
+                       name="electricalCorrectiveAction"
+                       pattern="^[a-zA-Z0-9\s.,]{1,50}$"
+                       minlength="1"
+                       maxlength="150"
+                       #electricalCorrectiveAction="ngModel"
+                       [(ngModel)]="detail.electricalCorrectiveAction"
+                       [readonly]="crudOperation == 'view'"
+                        />
+              </mat-form-field>
+            </div>
+            <div
+                 *ngIf="!electricalCorrectiveAction?.valid && (electricalCorrectiveAction?.dirty || electricalCorrectiveAction?.touched)">
+              <div *ngIf="electricalCorrectiveAction?.errors?.required"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.required" | translate }}
+              </div>
+              <div *ngIf="electricalCorrectiveAction?.errors?.pattern"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.pattern" | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="20" fxFlex.lt-sm="100">
+            <mat-label>If No, electrical inspection done, please mention What is the Plan for
+              inspection?</mat-label>
+          </div>
+          <div fxFlex="80" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>If No, electrical inspection done, please mention What is the Plan for
+                  inspection?</mat-label>
+                <input
+                       matInput
+                       name="electricalAuditInspection"
+                       pattern="^[a-zA-Z0-9\s.,]{1,50}$"
+                       minlength="1"
+                       #electricalAuditInspection="ngModel"
+                       maxlength="150"
+                       [(ngModel)]="detail.electricalAuditInspection"
+                       [readonly]="crudOperation=='view'"
+                        />
+              </mat-form-field>
+            </div>
+            <div
+                 *ngIf="!electricalAuditInspection?.valid && (electricalAuditInspection?.dirty || electricalAuditInspection?.touched)">
+              <div *ngIf="electricalAuditInspection?.errors?.required"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.required" | translate }}
+              </div>
+              <div *ngIf="electricalAuditInspection?.errors?.pattern"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.pattern" | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="80" fxFlex.lt-sm="100">
+            <h4>3. Appointment of dedicated technical person to check / Monitor Oxygen Pipeline,
+              Cylinders & Tank (24 X 7)</h4>
+          </div>
+          <div fxFlex="20" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-select
+                          name="technicalPersonAppoint"
+                          [(value)]="detail.technicalPersonAppoint"
+                          [disabled]="crudOperation=='view'"
+                          required>
+                  <mat-option>None</mat-option>
+                  <mat-option value="true">YES</mat-option>
+                  <mat-option value="false">NO</mat-option>
+                </mat-select>
+                <mat-error *ngIf="editForm.controls.technicalPersonAppoint?.errors?.required">
+                  {{ 'validations.required' | translate }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="20" fxFlex.lt-sm="100">
+            <mat-label>If yes </mat-label>
+          </div>
+          <div fxFlex="80" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>Technical Person Name</mat-label>
+                <input
+                       matInput
+                       name="techPersonname"
+                       pattern="^[a-zA-Z0-9\s.,]{1,100}$"
+                       minlength="1"
+                       maxlength="100"
+                       #techPersonname="ngModel"
+                       [(ngModel)]="detail.techPersonname"
+                       [readonly]="crudOperation == 'view'"
+                        />
+              </mat-form-field>
+            </div>
+            <div
+                 *ngIf="!techPersonname?.valid && (techPersonname?.dirty || techPersonname?.touched)">
+              <div *ngIf="techPersonname?.errors?.required"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.required" | translate }}
+              </div>
+              <div *ngIf="techPersonname?.errors?.pattern"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.pattern" | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="20" fxFlex.lt-sm="100">
+            <mat-label>Mobile No.</mat-label>
+          </div>
+          <div fxFlex="80" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>Mobile No.</mat-label>
+                <input
+                       matInput
+                       type="tel"
+                       name="techPersonMobNo"
+                       pattern="^[0-9\s.,]{10,10}$"
+                       maxlength="10"
+                       [(ngModel)]="detail.techPersonMobNo"
+                       #techPersonMobNo="ngModel"
+                       [readonly]="crudOperation == 'view'"
+                        />
+              </mat-form-field>
+            </div>
+            <div
+                 *ngIf="!techPersonMobNo?.valid && (techPersonMobNo?.dirty || techPersonMobNo?.touched)">
+
+              <div *ngIf="techPersonMobNo?.errors?.required" style="margin-left: 5px; color: red;">
+                {{ "validations.required" | translate }}
+              </div>
+              <div *ngIf="techPersonMobNo?.errors?.pattern" style="margin-left: 5px; color: red;">
+                Contact Number Should be 10 Digit
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="30" fxFlex.lt-sm="100">
+            <h4>4. Name of technical Engineer</h4>
+          </div>
+          <div fxFlex="70" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>Technical Engineer Name</mat-label>
+                <input
+                       matInput
+                       name="technicalEngineerName"
+                       pattern="^[a-zA-Z0-9\s.,]{1,100}$"
+                       minlength="1"
+                       maxlength="100"
+                       #technicalEngineerName="ngModel"
+                       [(ngModel)]="detail.technicalEngineerName"
+                       [readonly]="crudOperation=='view'" required />
+              </mat-form-field>
+            </div>
+            <div
+                 *ngIf="!technicalEngineerName?.valid && (technicalEngineerName?.dirty || technicalEngineerName?.touched)">
+
+              <div *ngIf="technicalEngineerName?.errors?.required"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.required" | translate }}
+              </div>
+              <div *ngIf="technicalEngineerName?.errors?.pattern"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.pattern" | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="30" fxFlex.lt-sm="100">
+            <mat-label>Address:</mat-label>
+          </div>
+          <div fxFlex="70" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>Address</mat-label>
+                <input
+                       matInput
+                       name="technicalEngineerAddress"
+                       pattern="^[a-zA-Z0-9\s.,]{1,50}$"
+                       minlength="1"
+                       maxlength="150"
+                       #technicalEngineerAddress="ngModel"
+                       [(ngModel)]="detail.technicalEngineerAddress"
+                       [readonly]="crudOperation == 'view'" required />
+              </mat-form-field>
+            </div>
+            <div
+                 *ngIf="!technicalEngineerAddress?.valid && (technicalEngineerAddress?.dirty || technicalEngineerAddress?.touched)">
+
+              <div *ngIf="technicalEngineerAddress?.errors?.required"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.required" | translate }}
+              </div>
+              <div *ngIf="technicalEngineerAddress?.errors?.pattern"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.pattern" | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="30" fxFlex.lt-sm="100">
+            <mat-label>Mobile No.</mat-label>
+          </div>
+          <div fxFlex="70" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>Technical Engineer Mobile No</mat-label>
+                <input
+                       matInput
+                       type="tel"
+                       maxlength="10"
+                       name="technicalEngineerMob"
+                       pattern="^[0-9\s.,]{10,10}$"
+                       #technicalEngineerMob="ngModel"
+                       [(ngModel)]="detail.technicalEngineerMob"
+                       [readonly]="crudOperation=='view'" required />
+              </mat-form-field>
+            </div>
+            <div
+                 *ngIf="!technicalEngineerMob?.valid && (technicalEngineerMob?.dirty || technicalEngineerMob?.touched)">
+
+              <div *ngIf="technicalEngineerMob?.errors?.required"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.required" | translate }}
+              </div>
+              <div *ngIf="technicalEngineerMob?.errors?.pattern"
+                   style="margin-left: 5px; color: red;">
+                   Contact Number Should be 10 Digit
+              </div>
+            </div>
+          </div>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="30" fxFlex.lt-sm="100">
+            <mat-label>Alternate Mobile No.</mat-label>
+          </div>
+          <div fxFlex="70" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>Technical Engineer Alternate Mobile No. </mat-label>
+                <input
+                       matInput
+                       type="tel"
+                       maxlength="10"
+                       name="technicalEngineerAlternateMob"
+                       pattern="^[0-9\s.,]{10,10}$"
+                       #technicalEngineerAlternateMob="ngModel"
+                       [(ngModel)]="detail.technicalEngineerAlternateMob"
+                       [readonly]="crudOperation=='view'"  />
+              </mat-form-field>
+            </div>
+            <div
+                 *ngIf="!technicalEngineerAlternateMob?.valid && (technicalEngineerAlternateMob?.dirty || technicalEngineerAlternateMob?.touched)">
+
+              <div *ngIf="technicalEngineerAlternateMob?.errors?.required"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.required" | translate }}
+              </div>
+              <div *ngIf="technicalEngineerAlternateMob?.errors?.pattern"
+                   style="margin-left: 5px; color: red;">
+                   Contact Number Should be 10 Digit
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="30" fxFlex.lt-sm="100">
+            <h4>5. Daily Oxygen Requirement by Hospital (In MT) Before Audit</h4>
+          </div>
+          <div fxFlex="70" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>Daily Oxygen Requirement</mat-label>
+                <input
+                       matInput
+                       type="tel" positivenumbers
+                       name="o2HospRequirement"
+                       pattern="^[a-zA-Z0-9\s.,]{1,10}$"
+                       min = "0"
+                       minlength="1"
+                       maxlength="10"
+                       #o2HospRequirement="ngModel"
+                       [(ngModel)]="detail.o2HospRequirement"
+                       [readonly]="crudOperation == 'view'" required />
+
+              </mat-form-field>
+            </div>
+            <div
+                 *ngIf="!o2HospRequirement?.valid && (o2HospRequirement?.dirty || o2HospRequirement?.touched)">
+
+              <div *ngIf="o2HospRequirement?.errors?.required"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.required" | translate }}
+              </div>
+              <div *ngIf="o2HospRequirement?.errors?.pattern"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.pattern" | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="30" fxFlex.lt-sm="100">
+            <h4>6. Projected requirement of Oxygen by Hospital (In MT) As per Audit</h4>
+          </div>
+          <div fxFlex="70" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>Projected Oxygen Requirement</mat-label>
+                <input
+                       matInput
+                       type="tel" positivenumbers
+                      name="o2HospProjectedRequirement"
+                       min="0"
+                       minlength="1"
+                       maxlength="10"
+                       #o2HospProjectedRequirement="ngModel"
+                       [(ngModel)]="detail.o2HospProjectedRequirement"
+                       [readonly]="crudOperation == 'view'" required />
+
+              </mat-form-field>
+            </div>
+            <div
+                 *ngIf="!o2HospProjectedRequirement?.valid && (o2HospProjectedRequirement?.dirty || o2HospProjectedRequirement?.touched)">
+
+              <div *ngIf="o2HospProjectedRequirement?.errors?.required"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.required" | translate }}
+              </div>
+              <div *ngIf="o2HospProjectedRequirement?.errors?.pattern"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.pattern" | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="30" fxFlex.lt-sm="100">
+            <h4>7. Saving of Oxygen Requirement (In MT) which is possible</h4>
+          </div>
+          <div fxFlex="70" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>Saving of Oxygen Requirement</mat-label>
+                <input
+                       matInput
+                       type="tel"
+                       name="saveO2RequirementPossibleMT"
+                       minlength="1"
+                       #saveO2RequirementPossibleMT="ngModel"
+                       maxlength="10"
+                       [(ngModel)]="detail.saveO2RequirementPossibleMT"
+                       [readonly]="crudOperation == 'view'" required />
+              </mat-form-field>
+            </div>
+
+            <div
+                 *ngIf="!saveO2RequirementPossibleMT?.valid && (saveO2RequirementPossibleMT?.dirty || saveO2RequirementPossibleMT?.touched)">
+
+              <div *ngIf="saveO2RequirementPossibleMT?.errors?.required"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.required" | translate }}
+              </div>
+              <div *ngIf="saveO2RequirementPossibleMT?.errors?.pattern"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.pattern" | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="30" fxFlex.lt-sm="100">
+            <h4>8. Whether ward boy / sister is appointed (24 X 7) for monitoring of Oxygen Valves /
+              Ports and patient wise supply?</h4>
+          </div>
+          <div fxFlex="70" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>Monitoring of Oxygen Valves/Ports</mat-label>
+                <mat-select  name="monitoringO2ValvesPort"
+                            [(value)]="detail.monitoringO2ValvesPort"
+                           [disabled]="crudOperation=='view'" required>
+                  <mat-option>None</mat-option>
+                  <mat-option value="true">YES</mat-option>
+                  <mat-option value="false">NO</mat-option>
+                </mat-select>
+                <mat-error *ngIf="editForm.controls.monitoringO2ValvesPort?.errors?.required">
+                  {{ 'validations.required' | translate }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="30" fxFlex.lt-sm="100">
+            <h4>9. Whether Port / Valves is shut down, when patient goes to washroom / Eating </h4>
+          </div>
+          <div fxFlex="70" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>Whether Port/Valves is shut down</mat-label>
+                <mat-select  name="portValvesShutDown" [(value)]="detail.portValvesShutDown"
+                             [disabled]="crudOperation=='view'" required>
+                  <mat-option>None</mat-option>
+                  <mat-option value="true">YES</mat-option>
+                  <mat-option value="false">NO</mat-option>
+                </mat-select>
+                <mat-error *ngIf="editForm.controls.portValvesShutDown?.errors?.required">
+                  {{ 'validations.required' | translate }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="30" fxFlex.lt-sm="100">
+            <h4>10. Is there patient drill taken for Oxygen Usage?</h4>
+          </div>
+          <div fxFlex="70" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>Patient Drill Done Or Not</mat-label>
+                <mat-select name="idPatientDrillDone" [(value)]="detail.idPatientDrillDone"
+                            [disabled]="crudOperation=='view'" required>
+                  <mat-option>None</mat-option>
+                  <mat-option value="true">YES</mat-option>
+                  <mat-option value="false">NO</mat-option>
+                </mat-select>
+                <mat-error *ngIf="editForm.controls.idPatientDrillDone?.errors?.required">
+                  {{ 'validations.required' | translate }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="30" fxFlex.lt-sm="100">
+            <h4>11. Are staff Checking Carefully leakages of Oxygen Pipeline Cylinder & Cryogenic
+              tank daily?</h4>
+          </div>
+          <div fxFlex="70" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>Are Staff Checking Leakage</mat-label>
+                <mat-select  name="staffCheckingLeakage"
+                            [(value)]="detail.staffCheckingLeakage"
+                             [disabled]="crudOperation=='view'" required>
+                  <mat-option>None</mat-option>
+                  <mat-option value="true">YES</mat-option>
+                  <mat-option value="false">NO</mat-option>
+                </mat-select>
+                <mat-error *ngIf="editForm.controls.staffCheckingLeakage?.errors?.required">
+                  {{ 'validations.required' | translate }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="30" fxFlex.lt-sm="100">
+            <h4>12. Is patient Oxygen requirement finalized carefully by using prone position after
+              giving sufficient time by the Doctor? (Left Lateral, Right Lateral, Lying on belly,
+              Sitting up)</h4>
+          </div>
+          <div fxFlex="70" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>Patient Oxygen Requirement Finalized ?</mat-label>
+                <mat-select  name="patientO2ReqFinalized"
+                            [(value)]="detail.patientO2ReqFinalized"
+                             [disabled]="crudOperation == 'view'"
+                            required>
+                  <mat-option value="true">YES</mat-option>
+                  <mat-option value="false">NO</mat-option>
+                </mat-select>
+                <mat-error *ngIf="editForm.controls.patientO2ReqFinalized?.errors?.required">
+                  {{ 'validations.required' | translate }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="30" fxFlex.lt-sm="100">
+            <h4>13. Are Lightening Arresters available and installed on building?</h4>
+          </div>
+          <div fxFlex="70" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>Are Lightening Arresters available</mat-label>
+                <mat-select  name="locLightningArrerstor"
+                            [(value)]="detail.locLightningArrerstor"
+                             [disabled]="crudOperation=='view'" required>
+                  <mat-option value="true">YES</mat-option>
+                  <mat-option value="false">NO</mat-option>
+                </mat-select>
+                <mat-error *ngIf="editForm.controls.locLightningArrerstor?.errors?.required">
+                  {{ 'validations.required' | translate }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="30" fxFlex.lt-sm="100">
+            <h4>If available, where is it?</h4>
+          </div>
+          <div fxFlex="70" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>Lighting Installed</mat-label>
+                <mat-select  name="isLightingInstalled"
+                            [(value)]="detail.isLightingInstalled"
+                             [disabled]="crudOperation=='view'" required>
+                  <mat-option value="true">At Hospital</mat-option>
+                  <mat-option value="false">At Oxygen Cryogenic Tank area</mat-option>
+                </mat-select>
+                <mat-error *ngIf="editForm.controls.isLightingInstalled?.errors?.required">
+                  {{ 'validations.required' | translate }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+      </mat-card>
+      <button
+              *ngIf="crudOperation !='view'"
+              mat-raised-button
+              color="primary"
+              class="m-t-8"
+              [disabled]="(editForm.form.invalid && isSaving) || hasDone">
+        Save</button>&nbsp;&nbsp;
+      <!-- <button
+              *ngIf="crudOperation !='view'"
+              mat-raised-button
+              color="accent"
+              type="button"
+              class="m-t-8"
+              (click)="previousState()"
+              [disabled]="!isSaving">
+        Cancel
+      </button> -->
+      &nbsp;&nbsp;
+    </div>
+  </div>
+</form>

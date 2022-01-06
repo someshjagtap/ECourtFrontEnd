@@ -1,0 +1,777 @@
+<form
+      name="editForm"
+      role="form"
+      novalidate
+      (ngSubmit)="save()"
+      #editForm="ngForm"
+      class="form-field-full">
+  <div fxLayout="row wrap" class="matero-row">
+    <div fxFlex="100" class="matero-col">
+      <mat-card>
+        <!-- <mat-card-title>{{ detail.id != null ? 'Edit' : 'Create' }} Hospital </mat-card-title> -->
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="15" fxFlex.lt-sm="100">
+            <mat-label>Name of Covid Hospital:</mat-label>
+          </div>
+          <div fxFlex="85" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>Name of Covid Hospital</mat-label>
+              <input
+                     matInput
+                     name="hospName"
+                     pattern="^[a-zA-Z0-9\s.,]{2,50}$"
+                     minlength="1"
+                     maxlength="150"
+                     [(ngModel)]="detail.hospName"
+                     required
+                     [disabled]="true"
+                     [readonly]="true" />
+              <mat-error *ngIf="editForm.controls.hospName?.errors?.required">
+                {{ 'validations.required' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="15" fxFlex.lt-sm="100">
+            <mat-label>Type:</mat-label>
+          </div>
+          <div fxFlex="85" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-select name="hospType" [(value)]="detail.hospType"
+                          [disabled]="crudOperation=='view'"
+                          required>
+                <mat-option>None</mat-option>
+                <mat-option value="DCH">DCH</mat-option>
+                <mat-option value="DCHC">DCHC</mat-option>
+                <mat-option value="Private O2 Only">Private O2 Only</mat-option>
+              </mat-select>
+              <mat-error *ngIf="editForm.controls.hospType?.errors?.required">
+                {{ 'validations.required' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="15" fxFlex.lt-sm="100">
+            <mat-label>Name of Incharge Dr. of Covid Hospital:</mat-label>
+          </div>
+          <div fxFlex="85" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>Name of Incharge</mat-label>
+              <input
+                     matInput
+                     name="inchargeName"
+                     pattern="^[a-zA-Z0-9\s.,]{2,50}$"
+                     minlength="1"
+                     maxlength="150"
+                     [(ngModel)]="detail.inchargeName"
+                     required
+                     [readonly]="crudOperation == 'view'" />
+              <mat-error *ngIf="editForm.controls.inchargeName?.errors?.required">
+                {{ 'validations.required' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="15" fxFlex.lt-sm="100">
+            <mat-label>Hospital Address</mat-label>
+          </div>
+          <div fxFlex="40" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>Hospital Address</mat-label>
+              <input
+                     matInput
+                     name="hospAddress"
+                     pattern="^[a-zA-Z0-9\s.,]{1,50}$"
+                     minlength="1"
+                     maxlength="150"
+                     [(ngModel)]="detail.hospAddress"
+                     required
+                     [readonly]="crudOperation=='view'" />
+              <mat-error *ngIf="editForm.controls.hospAddress?.errors?.required">
+                {{ 'validations.required' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <mat-label>Telephone No :</mat-label>
+          <div fxFlex="30" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>Telephone No :</mat-label>
+                <input
+                       matInput
+                       name="hospPhoneNo"
+                       type="tel" positivenumbers
+                       min="0"
+                       pattern="^[0-9\s.,]{10,10}$"
+                       minlength="10"
+                       maxlength="10"
+                       [(ngModel)]="detail.hospPhoneNo"
+                       required
+                       #hospPhoneNo="ngModel"
+                       [readonly]="crudOperation=='view'" />
+              </mat-form-field>
+            </div>
+            <div *ngIf="!hospPhoneNo?.valid && (hospPhoneNo?.dirty || hospPhoneNo?.touched)">
+
+              <div *ngIf="hospPhoneNo?.errors?.required" style="margin-left: 127px; color: red;">
+                {{ "validations.required" | translate }}
+              </div>
+              <div *ngIf="hospPhoneNo?.errors?.pattern" style="margin-left: 10px; color: red;">
+                Contact Number Should be 10 Digit
+              </div>
+            </div>
+          </div>
+        </div>
+        <div fxLayout="row" fxFlex.lt-sm="100">
+          <div fxFlex="50" fxLayout="column" fxLayoutGap="8px grid">
+            <mat-label>Beds in Hospital:</mat-label>
+            <div fxLayout="row wrap" fxLayoutGap="8px grid">
+              <div fxFlex="20" fxFlex.lt-sm="100">
+                <mat-label>Normal Beds:</mat-label>
+              </div>
+              <div fxFlex="70" fxFlex.lt-sm="100">
+             <div>
+              <mat-form-field>
+                <mat-label>Normal Beds</mat-label>
+                <input
+                       matInput
+                       name="normalBeds"
+                       type="tel" positivenumbers
+                       min="0"
+                       maxlength="10"
+                       pattern="^(?!.*([0])\1{2})[0-9]\d{0,4}$"
+                       [(ngModel)]="detail.normalBeds"
+                       required
+                       #normalBeds="ngModel"
+                       [readonly]="crudOperation=='view'" />
+              </mat-form-field>
+             </div>
+                <div *ngIf="!normalBeds?.valid && (normalBeds?.dirty || normalBeds?.touched)">
+                  <div *ngIf="normalBeds?.errors?.required"
+                       style="margin-left: 5px; color: red;">
+                    {{ "validations.required" | translate }}
+                  </div>
+                  <div *ngIf="normalBeds?.errors?.pattern"
+                       style="margin-left: 5px; color: red;">
+                    {{ "validations.pattern" | translate }}
+                  </div>
+                </div>
+              </div>
+              <div fxFlex="20" fxFlex.lt-sm="100">
+                <mat-label>O2 Support Beds:</mat-label>
+              </div>
+              <div fxFlex="70" fxFlex.lt-sm="100">
+                <div>
+                  <mat-form-field>
+                    <mat-label>O2 Support Beds</mat-label>
+                    <input
+                           matInput
+                           name="oxygenBeds"
+                           type="tel" positivenumbers
+                           min="0"
+                           pattern="^(?!.*([0])\1{2})[0-9]\d{0,4}$"
+                           minlength="1"
+                           maxlength="10"
+                           [(ngModel)]="detail.oxygenBeds"
+                           required
+                           #oxygenBeds='ngModel'
+                           [readonly]="crudOperation=='view'" />
+                  </mat-form-field>
+                </div>
+                <div *ngIf="!oxygenBeds?.valid && (oxygenBeds?.dirty || oxygenBeds?.touched)">
+                  <div *ngIf="oxygenBeds?.errors?.required"
+                       style="margin-left: 5px; color: red;">
+                    {{ "validations.required" | translate }}
+                  </div>
+                  <div *ngIf="oxygenBeds?.errors?.pattern"
+                       style="margin-left: 5px; color: red;">
+                    {{ "validations.pattern" | translate }}
+                  </div>
+                </div>
+              </div>
+              <div fxFlex="20" fxFlex.lt-sm="100">
+                <mat-label>Ventilator Beds:</mat-label>
+              </div>
+              <div fxFlex="70" fxFlex.lt-sm="100">
+                <div>
+                  <mat-form-field>
+                    <mat-label>Ventilator Beds</mat-label>
+                    <input
+                           matInput
+                           min="0"
+                           name="ventilatorBeds"
+                           type="tel" positivenumbers
+                           pattern="^(?!.*([0])\1{2})[0-9]\d{0,4}$"
+                           minlength="1"
+                           maxlength="10"
+                           [(ngModel)]="detail.ventilatorBeds"
+                           required
+                           #ventilatorBeds='ngModel'
+                           [readonly]="crudOperation=='view'" />
+                  </mat-form-field>
+                </div>
+                <div
+                     *ngIf="!ventilatorBeds?.valid && (ventilatorBeds?.dirty || ventilatorBeds?.touched)">
+                  <div *ngIf="ventilatorBeds?.errors?.required"
+                       style="margin-left: 5px; color: red;">
+                    {{ "validations.required" | translate }}
+                  </div>
+                  <div *ngIf="ventilatorBeds?.errors?.pattern"
+                       style="margin-left: 5px; color: red;">
+                    {{ "validations.pattern" | translate }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div fxFlex="50" fxLayout="column" fxLayoutGap="8px grid">
+            <mat-label>Patients on Oxygen:</mat-label>
+            <div fxLayout="row wrap" fxLayoutGap="8px grid">
+              <div fxFlex="20" fxFlex.lt-sm="100">
+                <mat-label>Patient on Oxygen Cylinders:</mat-label>
+              </div>
+              <div fxFlex="70" fxFlex.lt-sm="100">
+                <div>
+                  <mat-form-field>
+                    <mat-label>Patient on Oxygen Cylinders</mat-label>
+                    <input
+                           matInput
+                           name="onCylinderPatient"
+                           type="tel" positivenumbers
+                           min="0"
+                           pattern="^(?!.*([0])\1{2})[0-9]\d{0,4}$"
+                           minlength="1"
+                           maxlength="10"
+                           [(ngModel)]="detail.onCylinderPatient"
+                           required
+                           #onCylinderPatient='ngModel'
+                           [readonly]="crudOperation=='view'" />
+                  </mat-form-field>
+                </div>
+                <div
+                     *ngIf="!onCylinderPatient?.valid && (onCylinderPatient?.dirty || onCylinderPatient?.touched)">
+                  <div *ngIf="onCylinderPatient?.errors?.required"
+                       style="margin-left: 5px; color: red;">
+                    {{ "validations.required" | translate }}
+                  </div>
+                  <div *ngIf="onCylinderPatient?.errors?.pattern"
+                       style="margin-left: 5px; color: red;">
+                    {{ "validations.pattern" | translate }}
+                  </div>
+                </div>
+              </div>
+              <div fxFlex="20" fxFlex.lt-sm="100">
+                <mat-label>Patient on Oxygen Piped Beds:</mat-label>
+              </div>
+              <div fxFlex="70" fxFlex.lt-sm="100">
+                <div>
+                  <mat-form-field>
+                    <mat-label>Patient on Oxygen Piped Beds</mat-label>
+                    <input
+                           matInput
+                           name="onPipedBedsPatient"
+                           type="tel" positivenumbers
+                           min="0"
+                           pattern="^(?!.*([0])\1{2})[0-9]\d{0,4}$"
+                           minlength="1"
+                           maxlength="10"
+                           [(ngModel)]="detail.onPipedBedsPatient"
+                           required
+                           #onPipedBedsPatient='ngModel'
+                           [readonly]="crudOperation=='view'" />
+                  </mat-form-field>
+                </div>
+                <div
+                     *ngIf="!onPipedBedsPatient?.valid && (onPipedBedsPatient?.dirty || onPipedBedsPatient?.touched)">
+                  <div *ngIf="onPipedBedsPatient?.errors?.required"
+                       style="margin-left: 5px; color: red;">
+                    {{ "validations.required" | translate }}
+                  </div>
+                  <div *ngIf="onPipedBedsPatient?.errors?.pattern"
+                       style="margin-left: 5px; color: red;">
+                    {{ "validations.pattern" | translate }}
+                  </div>
+                </div>
+              </div>
+              <div fxFlex="20" fxFlex.lt-sm="100">
+                <mat-label>Patient on NIV:</mat-label>
+              </div>
+              <div fxFlex="70" fxFlex.lt-sm="100">
+                <div>
+                  <mat-form-field>
+                    <mat-label>Patient on NIV:</mat-label>
+                    <input
+                           matInput
+                           name="onNIV"
+                           type="tel" positivenumbers
+                           min="0"
+                           pattern="^(?!.*([0])\1{2})[0-9]\d{0,4}$"
+                           minlength="1"
+                           maxlength="10"
+                           [(ngModel)]="detail.onNIV"
+                           required
+                           #onNIV='ngModel'
+                           [readonly]="crudOperation=='view'" />
+                  </mat-form-field>
+                </div>
+                <div *ngIf="!onNIV?.valid && (onNIV?.dirty || onNIV?.touched)">
+                  <div *ngIf="onNIV?.errors?.required"
+                       style="margin-left: 5px; color: red;">
+                    {{ "validations.required" | translate }}
+                  </div>
+                  <div *ngIf="onNIV?.errors?.pattern"
+                       style="margin-left: 5px; color: red;">
+                    {{ "validations.pattern" | translate }}
+                  </div>
+                </div>
+              </div>
+              <div fxFlex="20" fxFlex.lt-sm="100">
+                <mat-label>Patient Intubated:</mat-label>
+              </div>
+              <div fxFlex="70" fxFlex.lt-sm="100">
+                <div>
+                  <mat-form-field>
+                    <mat-label>Patient Intubated:</mat-label>
+                    <input
+                           matInput
+                           name="onIntubated"
+                           type="tel" positivenumbers
+                           min="0"
+                           pattern="^(?!.*([0])\1{2})[0-9]\d{0,4}$"
+                           minlength="1"
+                           maxlength="10"
+                           [(ngModel)]="detail.onIntubated"
+                           required
+                           #onIntubated='ngModel'
+                           [readonly]="crudOperation=='view'" />
+                  </mat-form-field>
+                </div>
+                <div *ngIf="!onIntubated?.valid && (onIntubated?.dirty || onIntubated?.touched)">
+                  <div *ngIf="onIntubated?.errors?.required"
+                       style="margin-left: 5px; color: red;">
+                    {{ "validations.required" | translate }}
+                  </div>
+                  <div *ngIf="onIntubated?.errors?.pattern"
+                       style="margin-left: 5px; color: red;">
+                    {{ "validations.pattern" | translate }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="oxygenUse">
+          <app-oxygen-use [crudOperation]="crudOperation"
+                          [search]="{ 'formName.contains': formName, 'type.equals': 'A', 'auditId.equals':detail.auditId }">
+          </app-oxygen-use>
+          &nbsp;
+        </div>
+
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <h2>Jumbo Oxygen Cylinder General Information:</h2>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="15" fxFlex.lt-sm="100">
+            <mat-label>Type of Jumbo System installed:</mat-label>
+          </div>
+          <div fxFlex="85" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>Type of Jumbo System</mat-label>
+              <input
+                     matInput
+                     name="jumboSystemInstalledType"
+                     minlength="1"
+                     maxlength="150"
+                     [(ngModel)]="detail.jumboSystemInstalledType"
+                     required
+                     [readonly]="crudOperation=='view'" />
+              <mat-error *ngIf="editForm.controls.jumboSystemInstalledType?.errors?.required">
+                {{ 'validations.required' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <h3>Available Oxygen Cylinder in hospitals:</h3>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="15" fxFlex.lt-sm="100">
+            <mat-label>Type D (7CuM) :</mat-label>
+          </div>
+          <div fxFlex="85" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>Type D (7CuM)</mat-label>
+                <input
+                       matInput
+                       name="availableCylinderTypeD7"
+                       type="number" positivenumbers
+                       min="0"
+                       pattern="^(?!.*([0])\1{2})[0-9]\d{0,4}$"
+                       minlength="1"
+                       maxlength="150"
+                       [(ngModel)]="detail.availableCylinderTypeD7"
+                       required
+                       #availableCylinderTypeD7="ngModel"
+                       [readonly]="crudOperation=='view'" />
+              </mat-form-field>
+            </div>
+            <div
+                 *ngIf="!availableCylinderTypeD7?.valid && (availableCylinderTypeD7?.dirty || availableCylinderTypeD7?.touched)">
+              <div *ngIf="availableCylinderTypeD7?.errors?.required"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.required" | translate }}
+              </div>
+              <div *ngIf="availableCylinderTypeD7?.errors?.pattern"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.pattern" | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="15" fxFlex.lt-sm="100">
+            <mat-label>Type B (1.5CuM) :</mat-label>
+          </div>
+          <div fxFlex="85" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>Type B (1.5CuM)</mat-label>
+                <input
+                       matInput
+                       name="availableCylinderTypeB" positivenumbers
+                       min="0"
+                       type="number"
+                       pattern="^(?!.*([0])\1{2})[0-9]\d{0,4}$"
+                       minlength="1"
+                       maxlength="150"
+                       [(ngModel)]="detail.availableCylinderTypeB"
+                       required
+                       #availableCylinderTypeB="ngModel"
+                       [readonly]="crudOperation=='view'" />
+              </mat-form-field>
+            </div>
+            <div
+                 *ngIf="!availableCylinderTypeB?.valid && (availableCylinderTypeB?.dirty || availableCylinderTypeB?.touched)">
+              <div *ngIf="availableCylinderTypeB?.errors?.required"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.required" | translate }}
+              </div>
+              <div *ngIf="availableCylinderTypeB?.errors?.pattern"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.pattern" | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="15" fxFlex.lt-sm="100">
+            <mat-label>Total :</mat-label>
+          </div>
+          <div fxFlex="85" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>Total</mat-label>
+                <input
+                       matInput
+                       name="freeField4" positivenumbers
+                       min="0"
+                       type="number"
+                       pattern="^(?!.*([0])\1{2})[0-9]\d{0,4}$"
+                       minlength="1"
+                       maxlength="150"
+                       [(ngModel)]="detail.freeField4"
+                       required
+                       #freeField4='ngModel'
+                       [readonly]="crudOperation=='view'" />
+              </mat-form-field>
+            </div>
+            <div
+                 *ngIf="!freeField4?.valid && (freeField4?.dirty || freeField4?.touched)">
+              <div *ngIf="freeField4?.errors?.required"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.required" | translate }}
+              </div>
+              <div *ngIf="freeField4?.errors?.pattern"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.pattern" | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div fxLayout="row" fxFlex.lt-sm="100">
+          <div fxFlex="50" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="8px grid">
+            <h3>Source of Oxygen Cylinders</h3>
+          </div>
+          <div fxFlex="50" fxLayout="column" fxLayoutGap="8px grid">
+            <div fxLayout="row wrap" fxLayoutGap="8px grid">
+              <div fxFlex="20" fxFlex.lt-sm="100">
+                <mat-label>Agency Name:</mat-label>
+              </div>
+              <div fxFlex="70" fxFlex.lt-sm="100">
+                <mat-form-field>
+                  <mat-label>Agency Name:</mat-label>
+                  <input
+                         matInput
+                         name="cylinderAgencyName"
+                         pattern="^[a-zA-Z0-9\s.,]{1,50}$"
+                         minlength="1"
+                         maxlength="150"
+                         [(ngModel)]="detail.cylinderAgencyName"
+                         required
+                         [readonly]="crudOperation=='view'" />
+                  <mat-error *ngIf="editForm.controls.cylinderAgencyName?.errors?.required">
+                    {{ 'validations.required' | translate }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div fxFlex="20" fxFlex.lt-sm="100">
+                <mat-label>Address:</mat-label>
+              </div>
+              <div fxFlex="70" fxFlex.lt-sm="100">
+                <mat-form-field>
+                  <mat-label>Address</mat-label>
+                  <input
+                         matInput
+                         name="cylinderAgencyAddress"
+                         pattern="^[a-zA-Z0-9\s.,]{1,50}$"
+                         minlength="1"
+                         maxlength="150"
+                         [(ngModel)]="detail.cylinderAgencyAddress"
+                         required
+                         [readonly]="crudOperation=='view'" />
+                  <mat-error *ngIf="editForm.controls.cylinderAgencyAddress?.errors?.required">
+                    {{ 'validations.required' | translate }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+      <mat-card>
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <h3>LMO General Information</h3>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="15" fxFlex.lt-sm="100">
+            <mat-label>Available LMO capacity in KL:</mat-label>
+          </div>
+          <div fxFlex="85" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>Available LMO capacity in KL</mat-label>
+                <input
+                       matInput
+                       name="availableLMOCapacityKL"
+                       type="tel" positivenumbers
+                       min="0"
+                       positivenumber
+                       minlength="1"
+                       maxlength="150"
+                       [(ngModel)]="detail.availableLMOCapacityKL"
+                       required
+                       #availableLMOCapacityKL="ngModel"
+                       [readonly]="crudOperation=='view'" />
+
+              </mat-form-field>
+            </div>
+            <div
+                 *ngIf="!availableLMOCapacityKL?.valid && (availableLMOCapacityKL?.dirty || availableLMOCapacityKL?.touched)">
+              <div *ngIf="availableLMOCapacityKL?.errors?.required"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.required" | translate }}
+              </div>
+              <div *ngIf="availableLMOCapacityKL?.errors?.pattern"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.pattern" | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="15" fxFlex.lt-sm="100">
+            <mat-label>Name of LMO Supplier:</mat-label>
+          </div>
+          <div fxFlex="85" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>Name of LMO Supplier</mat-label>
+              <input
+                     matInput
+                     name="lmoSupplierName"
+                     pattern="^[a-zA-Z0-9\s.,]{1,100}$"
+                     minlength="1"
+                     maxlength="100"
+                     [(ngModel)]="detail.lmoSupplierName"
+                     required
+                     [readonly]="crudOperation=='view'" />
+              <mat-error *ngIf="editForm.controls.lmoSupplierName?.errors?.required">
+                {{ 'validations.required' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="15" fxFlex.lt-sm="100">
+            <mat-label>Frequency of LMO supplied:</mat-label>
+          </div>
+          <div fxFlex="85" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>Frequency of LMO supplied</mat-label>
+                <input
+                       matInput
+                       name="lmoSupplierFrequency"
+                       type="tel" positivenumbers
+                       min="0"
+                       positivenumber
+                       minlength="1"
+                       maxlength="10"
+                       [(ngModel)]="detail.lmoSupplierFrequency"
+                       required
+                       #lmoSupplierFrequency="ngModel"
+                       [readonly]="crudOperation=='view'" />
+              </mat-form-field>
+            </div>
+            <div
+                 *ngIf="!lmoSupplierFrequency?.valid && (lmoSupplierFrequency?.dirty || lmoSupplierFrequency?.touched)">
+              <div *ngIf="lmoSupplierFrequency?.errors?.required"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.required" | translate }}
+              </div>
+              <div *ngIf="lmoSupplierFrequency?.errors?.pattern"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.pattern" | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="15" fxFlex.lt-sm="100">
+            <mat-label>Quantity of LMO supplied in last Delivery</mat-label>
+          </div>
+          <div fxFlex="85" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>Quantity of LMO supplied in last Delivery</mat-label>
+                <input
+                       matInput
+                       name="lastLmoSuppliedQuantity"
+                       type="tel" positivenumbers
+                       min="0"
+                       positivenumber
+                       minlength="1"
+                       maxlength="150"
+                       [(ngModel)]="detail.lastLmoSuppliedQuantity"
+                       required
+                       #lastLmoSuppliedQuantity="ngModel"
+                       [readonly]="crudOperation=='view'" />
+              </mat-form-field>
+            </div>
+            <div
+                 *ngIf="!lastLmoSuppliedQuantity?.valid && (lastLmoSuppliedQuantity?.dirty || lastLmoSuppliedQuantity?.touched)">
+              <div *ngIf="lastLmoSuppliedQuantity?.errors?.required"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.required" | translate }}
+              </div>
+              <div *ngIf="lastLmoSuppliedQuantity?.errors?.pattern"
+                   style="margin-left: 5px; color: red;">
+                {{ "validations.pattern" | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="30" fxFlex.lt-sm="100">
+            <h4>Structural Audit Done ?</h4>
+          </div>
+          <div fxFlex="70" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>Structural Audit Done Or Not</mat-label>
+                <mat-select  name="freeField1"
+                            [(value)]="detail.freeField1"
+                           [disabled]="crudOperation=='view'" required>
+                  <mat-option>None</mat-option>
+                  <mat-option value="Yes">YES</mat-option>
+                  <mat-option value="No">NO</mat-option>
+                </mat-select>
+                <mat-error *ngIf="editForm.controls.freeField1?.errors?.required">
+                  {{ 'validations.required' | translate }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="30" fxFlex.lt-sm="100">
+            <h4>Oxygen Audit Done ?</h4>
+          </div>
+          <div fxFlex="70" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>Oxygen Audit Done Or Not</mat-label>
+                <mat-select  name="freeField2"
+                            [(value)]="detail.freeField2"
+                           [disabled]="crudOperation=='view'" required>
+                  <mat-option>None</mat-option>
+                  <mat-option value="Yes">YES</mat-option>
+                  <mat-option value="No">NO</mat-option>
+                </mat-select>
+                <mat-error *ngIf="editForm.controls.freeField2?.errors?.required">
+                  {{ 'validations.required' | translate }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="30" fxFlex.lt-sm="100">
+            <h4>Rate Regulation Audit Done ?</h4>
+          </div>
+          <div fxFlex="70" fxFlex.lt-sm="100">
+            <div>
+              <mat-form-field>
+                <mat-label>Rate Regulation Audit Done Or Not</mat-label>
+                <mat-select  name="freeField3"
+                            [(value)]="detail.freeField3"
+                           [disabled]="crudOperation=='view'" required>
+                  <mat-option>None</mat-option>
+                  <mat-option value="Yes">YES</mat-option>
+                  <mat-option value="No">NO</mat-option>
+                </mat-select>
+                <mat-error *ngIf="editForm.controls.freeField3?.errors?.required">
+                  {{ 'validations.required' | translate }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+      <button *ngIf="crudOperation !='view'"
+              mat-raised-button
+              color="primary"
+              class="m-t-8"
+              [disabled]="(editForm.form.invalid && isSaving) || hasDone">
+        Save</button>&nbsp;&nbsp;
+      <!-- <button
+              *ngIf="crudOperation !='view'"
+              mat-raised-button
+              color="accent"
+              type="button"
+              class="m-t-8"
+              (click)="previousState()"
+              [disabled]="!isSaving">
+        Cancel
+      </button> -->
+      &nbsp;&nbsp;
+    </div>
+  </div>
+</form>

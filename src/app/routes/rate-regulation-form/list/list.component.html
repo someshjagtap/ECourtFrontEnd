@@ -1,0 +1,82 @@
+
+<page-header></page-header>
+
+<mtx-grid
+  [data]="list"
+  [columns]="columns"
+  [loading]="isLoading"
+  [columnResizable]="false"
+  [multiSelectable]="false"
+  [rowSelectable]="false"
+  [hideRowSelectionCheckbox]="true"
+  [rowHover]="false"
+  [rowStriped]="true"
+  [columnMovable]="true"
+  [showToolbar]="true"
+  [toolbarTitle]="'Hospitals'"
+  [toolbarTemplate]="toolbarTpl"
+  [expandable]="expandable"
+  [expansionTemplate]="expansionTpl"
+  [pageOnFront]="false"
+  [showPaginator]="true"
+  [length]="pageContext.totalItems"
+  [pageSizeOptions]="[5, 10, 20, 50]"
+  [pageIndex]="pageContext.page"
+  [pageSize]="pageContext.itemsPerPage"
+  (page)="onPageChange($event)"
+  [sortOnFront]="false"
+  (sortChange)="changeSort($event)"
+  [cellTemplate]="{ name: nameTpl }"
+>
+</mtx-grid>
+<ng-template #nameTpl let-row let-index="index" let-col="colDef">
+  <a [routerLink]="'/admin/hospital/view/' + row.id" *authorityHide="['HOSPITAL_VIEW']">{{
+    row.name
+  }}</a>
+  <div *authorityShow="['HOSPITAL_VIEW']">{{ row.name }}</div>
+</ng-template>
+<ng-template #expansionTpl let-row>
+  <div style="width: 100%;">
+
+    <table style="width: 100%;" class="styled-table" *ngIf="row.inventory != null">
+      <thead>
+        <tr>
+          <th scope="col" style="text-align: left;">Inventory</th>
+          <th scope="col" style="width: 20%;">Stock</th>
+          <th scope="col" style="width: 20%;">Capcity</th>
+          <th scope="col" style="width: 20%; text-align: left;">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let obj of row.inventory">
+          <td>{{ obj.inventoryMasterName }}</td>
+          <td>{{ obj.stock }}</td>
+          <td>{{ obj.capcity }}</td>
+          <td>{{ obj.lastModified | date }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-template>
+<ng-template #toolbarTpl>
+  <button
+    mat-raised-button
+    color="primary"
+    class="m-t-8"
+    (click)="add()"
+    [disabled]="hasAuditDoneForThisForm"
+    *authorityHide="['AUDIT_FORM_CREATE']"
+  >
+    Add New Entry
+  </button>
+  &nbsp;&nbsp;
+  <button
+    mat-raised-button
+    color="warn"
+    class="m-t-8"
+    (click)="previousState()"
+    [disabled]="isSaving"
+  >
+    Back
+  </button>
+</ng-template>

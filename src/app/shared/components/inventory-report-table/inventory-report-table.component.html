@@ -1,0 +1,84 @@
+<form [formGroup]="appraisalApplyForm" class="">
+  <form [formGroup]="appraisalApplyForm" class="">
+    <div style="text-align: center">
+      <h2>Inventory of Tools and Spares required for Each Liquid tank</h2>
+    </div>
+
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+      <div fxFlex="04" style="text-align: center">
+        <h3>Sr.No</h3>
+      </div>
+      <div fxFlex="31">
+        <h3>Description</h3>
+      </div>
+      <div fxFlex="12">
+        <h3>Required</h3>
+      </div>
+      <div fxFlex="20">
+        <h3>Actual Available</h3>
+      </div>
+      <div style="text-align: center; word-wrap: break-word">
+        <h3>Remarks</h3>
+      </div>
+    </div>
+    &nbsp;
+
+    <div formArrayName="inventoryReportTableForm">
+      <div
+        *ngFor="
+          let inventoryReportTableForm of appraisalApplyForm.get('inventoryReportTableForm')['controls'];
+          let i = index
+        "
+      >
+        <form [formGroup]="inventoryReportTableForm" (ngSubmit)="submitApplyAppraisal(inventoryReportTableForm.value)">
+          <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+            <mat-label fxFlex="4" style="text-align: center">{{ i + 1 }}</mat-label>
+
+            <mat-label fxFlex="31">{{ data[i].description }}</mat-label>
+            <mat-label fxFlex="12">{{ data[i].descriptionParameter }}</mat-label>
+            <mat-form-field fxFlex="20" appearance="outline">
+              <input
+                matInput
+                class="form-control"
+                id="actualAvailable_{{ i }}"
+                placeholder="Actual Available"
+                formControlName="actualAvailable"
+                pattern="^[0-9]+([\\,\\.][0-9]+)?$"
+                type="number"
+                required
+                [readonly] = "crudOperation == 'view'"
+                [crudOperation]="crudOperation == 'view'"
+              />
+            </mat-form-field>
+
+            <mat-form-field fxFlex="20" appearance="outline">
+              <input
+                matInput
+                class="form-control"
+                id="remark_{{ i }}"
+                placeholder="Remark"
+                formControlName="remark"
+                pattern=""
+                [readonly] = "crudOperation == 'view'"
+                [crudOperation]="crudOperation == 'view'"
+              />
+            </mat-form-field>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div>
+      <button
+        *ngIf="crudOperation != 'view'"
+        mat-raised-button
+        type="button"
+        (click)="onClick(appraisalApplyForm.value)"
+        color="primary"
+        [disabled]="(appraisalApplyForm.invalid && isSaving) || hasDone"
+      >
+        Submit Data</button
+      >&nbsp;&nbsp;
+
+    </div>
+  </form>
+</form>

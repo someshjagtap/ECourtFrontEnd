@@ -1,0 +1,232 @@
+<page-header></page-header>
+<form
+      name="hearingForm"
+      role="form"
+      novalidate
+      #hearingForm="ngForm"
+      (ngSubmit)="save()"
+      class="form-field-full">
+  <div fxLayout="row wrap" class="matero-row">
+    <div fxFlex="100.67" fxFlex.lt-sm="100" class="matero-col">
+      <mat-card>
+        <mat-card-title> Create Hearing </mat-card-title>
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="50" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>Accuser Name</mat-label>
+              <input
+                     matInput
+                     placeholder="Accuser Name"
+                     [(ngModel)]="detail.freefield1"
+                     name="freefield1"
+                     required
+                     pattern="^[a-zA-Z\s.,]{2,50}$"
+                     minlength="1"
+                     maxlength="50"
+                     type="text" />
+              <mat-error *ngIf="hearingForm.controls.freefield1?.errors?.required">
+                {{ 'validations.required' | translate }}
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Defendant Name</mat-label>
+              <input
+                     matInput
+                     placeholder="Defendant Name"
+                     [(ngModel)]="detail.freefield2"
+                     name="freefield2"
+                     pattern="^[a-zA-Z\s.,]{2,50}$"
+                     minlength="1"
+                     maxlength="50"
+                     type="text" />
+              <mat-error *ngIf="hearingForm.controls.freefield2?.errors?.required">
+                {{ 'validations.required' | translate }}
+              </mat-error>
+            </mat-form-field>
+
+          </div>
+
+          <div fxFlex="50" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>Participant Name</mat-label>
+              <input
+                     matInput
+                     placeholder="Participant Name"
+                     [(ngModel)]="detail.freefield3"
+                     name="freefield3"
+                     pattern="^[a-zA-Z\s.,]{2,50}$"
+                     minlength="1"
+                     maxlength="50"
+                     type="text" />
+              <mat-error *ngIf="hearingForm.controls.freefield3?.errors?.required">
+                {{ 'validations.required' | translate }}
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-placeholder>Hearing Date</mat-placeholder>
+              <mat-datetimepicker-toggle [for]="datetimePicker2" matSuffix>
+              </mat-datetimepicker-toggle>
+              <mat-datetimepicker #datetimePicker2 openOnFocus="true" startView="month"
+                                  timeInterval="5"
+                                  type="datetime"></mat-datetimepicker>
+              <input [matDatetimepicker]="datetimePicker2"
+                     autocomplete="false"
+                     name="hearingDate"
+                     [(ngModel)]="detail.hearingDate"
+                     #dateModel="ngModel"
+                     aria-label="Hearing Date"
+                     matInput
+                     [readonly]="true">
+            </mat-form-field>
+            <div
+                 *ngIf="!dateModel?.valid && (dateModel?.dirty || dateModel?.touched)">
+
+              <div *ngIf="dateModel?.errors?.required" style="margin-left: 5px; color: red;">
+                {{ "validations.required" | translate }}
+              </div>
+              <div *ngIf="dateModel?.errors?.pattern" style="margin-left: 5px; color: red;">
+                Invalid Date
+              </div>
+            </div>
+
+          </div>
+
+          <div fxFlex="50" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>Status</mat-label>
+              <input
+                     matInput
+                     placeholder="Status"
+                     [(ngModel)]="detail.status"
+                     name="status"
+                     required
+                     pattern="^[a-zA-Z\s.,]{2,50}$"
+                     minlength="1"
+                     maxlength="50"
+                     type="text" />
+              <mat-error *ngIf="hearingForm.controls.status?.errors?.required">
+                {{ 'validations.required' | translate }}
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Comment</mat-label>
+              <input
+                     matInput
+                     placeholder="Comment"
+                     [(ngModel)]="detail.comment"
+                     name="comment"
+                     pattern="^[a-zA-Z\s.,]{2,50}$"
+                     minlength="1"
+                     maxlength="50"
+                     type="text" />
+              <mat-error *ngIf="hearingForm.controls.comment?.errors?.required">
+                {{ 'validations.required' | translate }}
+              </mat-error>
+            </mat-form-field>
+
+          </div>
+
+          <div fxFlex="50" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>Conclusion</mat-label>
+              <input
+                     matInput
+                     placeholder="Conclusion"
+                     [(ngModel)]="detail.conclusion"
+                     name="conclusion"
+                     required
+                     pattern="^[a-zA-Z\s.,]{2,50}$"
+                     minlength="1"
+                     maxlength="50"
+                     type="text" />
+              <mat-error *ngIf="hearingForm.controls.conclusion?.errors?.required">
+                {{ 'validations.required' | translate }}
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-placeholder>Next Hearing Date</mat-placeholder>
+              <mat-datetimepicker-toggle [for]="datetimePicker3" matSuffix>
+              </mat-datetimepicker-toggle>
+              <mat-datetimepicker #datetimePicker3 openOnFocus="true" startView="month"
+                                  timeInterval="5"
+                                  type="datetime"></mat-datetimepicker>
+              <input [matDatetimepicker]="datetimePicker3"
+                     autocomplete="false"
+                     name="nextHearingDate"
+                     [(ngModel)]="detail.nextHearingDate"
+                     #dateModel="ngModel"
+                     aria-label=" Next Hearing Date"
+                     matInput
+                     [readonly]="true">
+            </mat-form-field>
+            <div
+                 *ngIf="!dateModel?.valid && (dateModel?.dirty || dateModel?.touched)">
+
+              <div *ngIf="dateModel?.errors?.required" style="margin-left: 5px; color: red;">
+                {{ "validations.required" | translate }}
+              </div>
+              <div *ngIf="dateModel?.errors?.pattern" style="margin-left: 5px; color: red;">
+                Invalid Date
+              </div>
+            </div>
+
+
+          </div>
+
+          <div fxFlex="50" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-placeholder>Previous Hearing Date</mat-placeholder>
+              <mat-datetimepicker-toggle [for]="datetimePicker4" matSuffix>
+              </mat-datetimepicker-toggle>
+              <mat-datetimepicker #datetimePicker4 openOnFocus="true" startView="month"
+                                  timeInterval="5"
+                                  type="datetime"></mat-datetimepicker>
+              <input [matDatetimepicker]="datetimePicker4"
+                     autocomplete="false"
+                     name="previousHearingDate"
+                     [(ngModel)]="detail.previousHearingDate"
+                     #dateModel="ngModel"
+                     aria-label=" Previous Hearing Date"
+                     matInput
+                     [readonly]="true">
+            </mat-form-field>
+            <div
+                 *ngIf="!dateModel?.valid && (dateModel?.dirty || dateModel?.touched)">
+
+              <div *ngIf="dateModel?.errors?.required" style="margin-left: 5px; color: red;">
+                {{ "validations.required" | translate }}
+              </div>
+              <div *ngIf="dateModel?.errors?.pattern" style="margin-left: 5px; color: red;">
+                Invalid Date
+              </div>
+            </div>
+
+
+
+
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+  <button
+          mat-raised-button
+          color="primary"
+          class="m-t-8"
+          type="submit"
+          [disabled]="hearingForm.form.invalid || isSaving">
+    Save</button>&nbsp;&nbsp;
+  <button
+          mat-raised-button
+          color="warn"
+          type="button"
+          class="m-t-8"
+          (click)="previousState()"
+          [disabled]="isSaving">
+    Cancel
+  </button>
+</form>

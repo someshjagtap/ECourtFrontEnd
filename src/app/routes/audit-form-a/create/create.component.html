@@ -1,0 +1,119 @@
+<page-header></page-header>
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-header>
+      <mat-card-title>COVID HOSPITAL INSPECTION / OXYGEN AUDIT FORM:</mat-card-title>
+      <mat-card-title>(GOVT. OF MAHARASHTRA)</mat-card-title>
+      <mat-card-subtitle>FORM TO BE FILLED BY AUDIT TEAM</mat-card-subtitle>
+    </mat-card-header>
+  </mat-card-header>
+  <mat-card-content>
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm" novalidate>
+      <mat-vertical-stepper linear>
+        <mat-step #sectionA="ngModelGroup" ngModelGroup="sectionA" [completed]="sectionA.valid">
+          <ng-template matStepLabel>A. GENERAL INFORMATION OF HOSPITAL</ng-template>
+          &nbsp;
+          <app-form-s [crudOperation]="crudOperation" [search]="{ 'formName.contains': 'Form A', 'type.equals': 'A' }"></app-form-s>
+          <!-- <app-transaction-list></app-transaction-list> -->
+        </mat-step>
+        <mat-step #sectionB="ngModelGroup" ngModelGroup="sectionB" [completed]="sectionB.valid">
+          <ng-template matStepLabel>B. GENERAL CHECKLIST FOR OXYGEN SYSTEM</ng-template>
+          &nbsp;
+          <app-questionnaire  [crudOperation]="crudOperation" [search]="{ 'formName.contains': 'Form A', 'type.equals': 'B' }"></app-questionnaire>
+        </mat-step>
+
+        <mat-step #sectionC="ngModelGroup" ngModelGroup="sectionC" [completed]="sectionC.valid">
+          <ng-template matStepLabel>C. OXYGEN PIPELINE GENERAL INSPECTION CHECKLIST</ng-template>
+          &nbsp;
+          <app-questionnaire  [crudOperation]="crudOperation" [search]="{ 'formName.contains': 'Form A', 'type.equals': 'C' }"></app-questionnaire>
+        </mat-step>
+
+        <mat-step #sectionD="ngModelGroup" ngModelGroup="sectionD" [completed]="sectionD.valid">
+          <ng-template matStepLabel>D. GENERAL OXYGEN WEANING PROTOCOL </ng-template>
+          &nbsp;
+          <app-questionnaire  [crudOperation]="crudOperation" [search]="{ 'formName.contains': 'Form A', 'type.equals': 'D' }"></app-questionnaire>
+        </mat-step>
+
+        <mat-step #sectionE="ngModelGroup" ngModelGroup="sectionE" [completed]="sectionE.valid">
+          <ng-template matStepLabel>E. JUMBO OXYGEN CYLINDER STORAGE CHECKLIST</ng-template>
+          &nbsp;
+          <app-questionnaire  [crudOperation]="crudOperation" [search]="{ 'formName.contains': 'Form A', 'type.equals': 'E' }"></app-questionnaire>
+        </mat-step>
+
+        <mat-step #sectionF="ngModelGroup" ngModelGroup="sectionF" [completed]="sectionF.valid">
+          <ng-template matStepLabel
+            >F. JUMBO OXYGEN CYLINDER OPERATION & MAINTENANCE CHECKLIST</ng-template
+          >
+          &nbsp;
+          <app-questionnaire  [crudOperation]="crudOperation" [search]="{ 'formName.contains': 'Form A', 'type.equals': 'F' }"></app-questionnaire>
+        </mat-step>
+
+        <mat-step #sectionG="ngModelGroup" ngModelGroup="sectionG" [completed]="sectionG.valid">
+          <ng-template matStepLabel
+            >G. PRECAUTION FOR EFFICIENT UTILIZATION OF JUMBO CYLINDERS (JUMBO SECTION)
+          </ng-template>
+          &nbsp;
+          <h4>Note: Every Type of Oxygen Container depletes in small quantities through valves</h4>
+          &nbsp;
+          <h4>Note: Jumbo Cylinders stored eventually will deplete and, in few weeks, or months will be empty, during the time of
+            emergency such cylinders become useless, following precautions need to be taken up by hospital administration to
+            avoid the above condition </h4>
+          &nbsp;
+          <app-questionnaire  [crudOperation]="crudOperation" [search]="{ 'formName.contains': 'Form A', 'type.equals': 'G' }"></app-questionnaire>
+        </mat-step>
+
+        <mat-step #sectionH="ngModelGroup" ngModelGroup="sectionH" [completed]="sectionH.valid">
+          <ng-template matStepLabel>H. DURA OXYGEN SYSTEM </ng-template>
+          &nbsp;
+          <h2>Tank Inspection Checklist</h2>
+          <app-questionnaire  [crudOperation]="crudOperation" [search]="{ 'formName.contains': 'Form A', 'type.equals': 'H', 'subType.equals': 'Tank Inspection Checklist' }"></app-questionnaire>
+          &nbsp;
+          <h2>Storage</h2>
+          <app-questionnaire  [crudOperation]="crudOperation" [search]="{ 'formName.contains': 'Form A', 'type.equals': 'H', 'subType.equals': 'Storage'  }"></app-questionnaire>
+          &nbsp;
+          <H2>Precautions for efficient utilization of Dura Cylinders</H2>
+          &nbsp;
+          <h4>Note: Duracell is also susceptible to the leakages and if the dura cylinders are not used for 2 to 3 days they will
+            vaporize and the Oxygen will be released to through the safety valve into atmosphere, while this happens there
+            is a big whistling sound that accompanies it. To avoid such wastage of oxygen the dura cylinders should be used
+            when they are bought in the hospital premises within 48 hours. They should be avoided stored in an area where
+            the temperature is high. In dura cylinders the oxygen is stored in cryogenic form as the temperature increases it
+            vaporizers and if not attended all the oxygen is lost the atmosphere does if the dura is being used as a backup
+            facility to the main element tank then every 2 days the dura pressure has to be increased more than the oxygen
+            pressure the LMO pressure and using the pressure differential the standby bank should be made as the primary
+            bank and emptied and refilled again this is of utmost importance and when during cylinders are being used for
+            backup for their own use for large number of days all Oxygen will be lost.</h4>
+            &nbsp;
+
+          <app-questionnaire  [crudOperation]="crudOperation" [search]="{ 'formName.contains': 'Form A', 'type.equals': 'H', 'subType.equals': 'Precautions for efficient utilization of Dura Cylinders'  }"></app-questionnaire>
+        </mat-step>
+
+        <mat-step #sectionI="ngModelGroup" ngModelGroup="sectionI" [completed]="sectionI.valid">
+          <ng-template matStepLabel>I. LMO OXYGEN SYSTEM</ng-template>
+          &nbsp;
+         <H2>Tank Inspection Checklist</H2>
+          <app-questionnaire [crudOperation]="crudOperation" [search]="{ 'formName.contains': 'Form A', 'type.equals': 'I' }"></app-questionnaire>
+          &nbsp;
+          <H2>Storage</H2>
+          <app-lmo-oxygen [crudOperation]="crudOperation" [search]="{ 'formName.contains': 'Form A', 'type.equals': 'I' }"></app-lmo-oxygen>
+        </mat-step>
+
+        <mat-step #sectionJ="ngModelGroup" ngModelGroup="sectionJ" [completed]="sectionJ.valid">
+          <ng-template matStepLabel>J. INVENTORY REPORT</ng-template>
+          &nbsp;
+          <app-inventory-report-table [crudOperation]="crudOperation" [search]="{ 'formName.contains': 'Form A', 'type.equals': 'J' }"></app-inventory-report-table>
+          <app-inventory [crudOperation]="crudOperation" [search]="{ 'formName.contains': 'Form A', 'type.equals': 'J' }"></app-inventory>
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel>Complete Audit FormA</ng-template>
+          <div>
+            <button mat-raised-button type="button" (click)="openDialog()" color="primary">
+              Complete Audit Form
+            </button>
+          </div>
+        </mat-step>
+      </mat-vertical-stepper>
+    </form>
+  </mat-card-content>
+</mat-card>

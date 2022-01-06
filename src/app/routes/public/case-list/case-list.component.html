@@ -1,0 +1,168 @@
+<div
+  class="matero-row"
+  fxLayout="row wrap"
+  *ngIf="pageContext.itemsPerPage > pageContext.totalItems"
+></div>
+<mat-card>
+  <div fxLayout="row wrap" class="matero-row">
+    <div fxFlex="100" class="matero-col">
+<!--
+      <mat-form-field class="m-r-8">
+        <mat-label>Case Number</mat-label>
+        <input matInput [(ngModel)]="search['hospName.contains']" />
+      </mat-form-field>
+
+      <mat-form-field class="m-r-8">
+        <mat-label>{{ 'hospital_list.hospital_name' | translate }}</mat-label>
+        <input matInput [(ngModel)]="search['hospName.contains']" />
+      </mat-form-field> -->
+
+      <mat-form-field>
+        <mat-label>Case Date</mat-label>
+        <input
+          matInput
+          name="inspectionDate"
+          [matDatepicker]="datePicker"
+          [(ngModel)]="search['queryDate']"
+          #dateModel="ngModel"
+          required
+          aria-label="Case Date"
+          [readonly]="true"
+        />
+        <mat-datepicker-toggle matSuffix [for]="datePicker" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #datePicker openOnFocus="true"></mat-datepicker>
+      </mat-form-field>
+
+      &nbsp;
+
+      <!-- <mat-form-field class="m-r-8" *ngIf="!hasHospitalUser">
+        <mat-label>{{ 'hospital_list.district' | translate }}</mat-label>
+        <mtx-select
+          [items]="districtList"
+          groupBy="divisionName"
+          [(ngModel)]="search['talukaId.equals']"
+          (change)="deletObj('talukaId.equals'); deletObj('cityId.equals')"
+          bindLabel="name"
+          bindValue="id"
+          appendTo="body"
+        >
+          <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+            <div [ngOptionHighlight]="search">{{ item.name }}</div>
+          </ng-template>
+        </mtx-select>
+      </mat-form-field> -->
+    </div>
+  </div>
+  <button mat-raised-button color="primary" (click)="onSearch(false)">
+    {{ 'hospital_list.search' | translate }}
+  </button>
+  &nbsp; &nbsp;
+  <button mat-raised-button color="danger" (click)="onSearch(true)">
+    {{ 'hospital_list.reset' | translate }}
+  </button>
+</mat-card>
+
+<mtx-grid
+  [data]="list"
+  [columns]="columns"
+  [loading]="isLoading"
+  [columnResizable]="false"
+  [multiSelectable]="false"
+  [rowSelectable]="false"
+  [hideRowSelectionCheckbox]="true"
+  [rowHover]="false"
+  [rowStriped]="true"
+  [columnMovable]="true"
+  [showToolbar]="true"
+  [toolbarTitle]="'Hospitals'"
+  [toolbarTemplate]="toolbarTpl"
+  [expandable]="expandable"
+  [expansionTemplate]="expansionTpl"
+  [pageOnFront]="false"
+  [showPaginator]="true"
+  [length]="pageContext.totalItems"
+  [pageSizeOptions]="[5, 10, 20, 50]"
+  [pageIndex]="pageContext.page"
+  [pageSize]="pageContext.itemsPerPage"
+  (page)="onPageChange($event)"
+  [sortOnFront]="false"
+  (sortChange)="changeSort($event)"
+  [cellTemplate]="{ caseNo: nameTpl }"
+>
+</mtx-grid>
+<ng-template #nameTpl let-row let-index="index" let-col="colDef">
+  <a [routerLink]="'/public/view/' + row.id">{{row.caseNo}}</a>
+  <!-- <div *authorityShow="['HOSPITAL_VIEW']">{{ row.caseNo }}</div> -->
+</ng-template>
+<ng-template #expansionTpl let-row>
+  <div style="width: 100%">
+    <table style="width: 100%" class="styled-table" *ngIf="row.inventory != null">
+      <thead>
+        <tr>
+          <th scope="col" style="text-align: left">Inventory</th>
+          <th scope="col" style="width: 20%">Stock</th>
+          <th scope="col" style="width: 20%">Capcity</th>
+          <th scope="col" style="width: 20%; text-align: left">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let obj of row.inventory">
+          <td>{{ obj.inventoryMasterName }}</td>
+          <td>{{ obj.stock }}</td>
+          <td>{{ obj.capcity }}</td>
+          <td>{{ obj.lastModified | date }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-template>
+<ng-template #toolbarTpl>
+  <button
+    mat-raised-button
+    color="primary"
+    class="m-t-8"
+    (click)="add()"
+  >
+    New Case
+  </button>
+
+  <!-- &nbsp;&nbsp;
+  <button
+    mat-raised-button
+    color="accent"
+    class="m-t-8"
+    (click)="goToForm1A()"
+    *authorityHide="['AUDIT_CREATE']"
+  >
+    Form 1A
+  </button>
+  &nbsp;&nbsp;
+  <button
+    mat-raised-button
+    color="accent"
+    class="m-t-8"
+    (click)="goToForm1B()"
+    *authorityHide="['AUDIT_CREATE']"
+  >
+    Form 1B
+  </button>
+  &nbsp;&nbsp;
+  <button
+    mat-raised-button
+    color="accent"
+    class="m-t-8"
+    (click)="goToForm1C()"
+    *authorityHide="['AUDIT_CREATE']"
+  >
+    Form 1C
+  </button>
+   &nbsp;&nbsp;
+  <button
+          mat-raised-button
+          color="warn"
+          class="m-t-8"
+          (click)="previousState()"
+          [disabled]="isSaving">
+    Back
+  </button> -->
+</ng-template>

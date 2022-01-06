@@ -1,0 +1,108 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'app/theme/style';
+@import 'styles/themes';
+@import 'styles/custom';
+@import 'styles/grid';
+@import 'styles/helpers';
+@import 'styles/plugins';
+
+.styled-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: .9em;
+  font-family: sans-serif;
+  min-width: 400px;
+  width: 100%;
+  // box-shadow: 0 0 20px rgba(0, 0, 0, .15);
+}
+
+.styled-table thead tr {
+  background-color: #eee;
+  text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+  border-bottom: 1px solid #ddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+// .styled-table tbody tr:last-of-type {
+//   border-bottom: 2px solid #3f51b5;
+// }
+
+.styled-table tbody {
+  color: black;
+}
+
+.cursor-pointer:hover {
+  // box-shadow: 0 0 10px #ff4081;
+  z-index: 1;
+  box-shadow: rgb(0 0 0 / 60%) 0 8px 24px 3px;
+}
+
+.cursor-pointer {
+  border: 2px solid #bdbdbd;
+}
+
+.mat-header-cell-inner {
+  font-weight: 600;
+}
+
+.mat-header-row {
+  background-color: #eee;
+}
+
+h2 strong {
+  display: table-caption;
+  font-size: 75%;
+  opacity: .75;
+}
+
+.toolbar-button {
+  margin: 0 14px !important;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+// .ng-valid[required] {
+//   background-color: green !important;
+// }
+
+// .ng-valid.required {
+//   background-color: yellow !important;
+// }
+
+.ng-invalid:not(form) .mat-form-field-underline {
+  // border-left: 5px solid red !important;
+  background-color: red !important;
+}
+
+.mtx-grid-no-result {
+  min-height: 30px !important;
+}
+
+.ml-auto,
+.mx-auto {
+  margin-left: auto !important;
+}
+
+.app-footer {
+  background-color: #fff;
+  height: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0 1rem;
+  color: #23282c;
+  border-top: 1px solid #c8ced3;
+}

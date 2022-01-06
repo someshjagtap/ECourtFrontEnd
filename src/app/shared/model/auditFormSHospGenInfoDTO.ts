@@ -1,0 +1,36 @@
+export interface AuditFormSHospGenInfoDTO   {
+  auditId?: number;
+  availableCylinderTypeB?: number;
+  availableCylinderTypeD7?: number;
+  availableLMOCapacityKL?: number;
+  cylinderAgencyAddress?: string;
+  cylinderAgencyName?: string;
+  formName?: string;
+  freeField1?: string;
+  freeField2?: string;
+  freeField3?: string;
+  freeField4?: string;
+  hospAddress?: string;
+  hospName?: string;
+  hospPhoneNo?: string;
+  hospType?: string;
+  icuBeds?: number;
+  id?: number;
+  inchargeName?: string;
+  jumboSystemInstalledType?: string;
+  lastLmoSuppliedQuantity?: number;
+  lastModified?: Date;
+  lastModifiedBy?: string;
+  lmoSupplierFrequency?: number;
+  lmoSupplierName?: string;
+  normalBeds?: number;
+  onCylinderPatient?: number;
+  onIntubated?: number;
+  onNIV?: number;
+  onPipedBedsPatient?: number;
+  oxygenBeds?: number;
+  remark?: string;
+  subType?: string;
+  type?: string;
+  ventilatorBeds?: number;
+}

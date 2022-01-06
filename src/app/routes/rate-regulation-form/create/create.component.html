@@ -1,0 +1,304 @@
+<div fxLayout="row wrap" class="matero-row">
+  <div fxFlex="100" class="matero-col">
+    <mat-card-title>{{ 'Enter the details for Rate Regulation' }}</mat-card-title>
+
+    <form
+          name="editForm"
+          role="form"
+          class="form-field-full"
+          (ngSubmit)="save()"
+          #editForm="ngForm">
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+
+        <mat-form-field fxFlex="50" appearance="outline">
+          <mat-label>Date of Submission</mat-label>
+          <input
+                 matInput
+                 [matDatepicker]="picker1"
+                 placeholder=" Date"
+                 name="submissionDate"
+                 [(ngModel)]="regulation.submissionDate"
+                 [max]="maxDate"
+                 i18n-placeholder
+                 required />
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker touchUi="true" #picker1></mat-datepicker>
+        </mat-form-field>
+        <!-- <mat-form-field fxFlex="50" appearance="outline">
+          <mat-label>Choose a date</mat-label>
+          <input matInput [matDatepicker]="picker"  name="submissionDate"
+          [(ngModel)]="regulation.submissionDate"
+          [max]="maxDate"
+          i18n-placeholder>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field> -->
+
+      </div>
+
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+        <mat-form-field appearance="outline" fxFlex="50">
+          <mat-label>Total no. of Covid Isolation beds</mat-label>
+          <input class="form-control" (input)="onSearchChange($event.target.value)"
+                 type="number" positivenumbers
+                 placeholder="Total no. of Covid Isolation beds"
+                 matInput
+                 name="totalNumCovidIsoBeds"
+                 minlength="1" maxlength="150"
+                 min="0"
+                 [(ngModel)]="regulation.totalNumCovidIsoBeds" required [readOnly]="readOnly" />
+          <mat-error *ngIf="editForm.controls.totalNumCovidIsoBeds?.errors?.required">
+            {{'validations.required' | translate}} only numbers are allowed</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" fxFlex="50">
+          <mat-label>80% Isolation beds under Regulation</mat-label>
+          <input
+                 type="number"
+                 placeholder="Isolation beds"
+                 matInput
+                 name="eightyIsoBedsUnderRegulation"
+                 minlength="1" maxlength="150"
+                 min="0"
+                 [(ngModel)]="regulation.eightyIsoBedsUnderRegulation" required
+                 [readOnly]="readOnly" />
+          <mat-error *ngIf="editForm.controls.eightyIsoBedsUnderRegulation?.errors?.required">
+            {{'validations.required' | translate}} only numbers are allowed</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+        <mat-form-field appearance="outline" fxFlex="50">
+          <mat-label>Total No. of Covid Patients Admitted</mat-label>
+          <input class="form-control" (input)="onSearchChangee($event.target.value)"
+                 type="number"
+                 placeholder="Total No. of Covid Patients Admitted"
+                 matInput
+                 name="totalNumCovidPatientAdmitted"
+                 minlength="1" maxlength="150"
+                 min="0"
+                 [(ngModel)]="regulation.totalNumCovidPatientAdmitted" required
+                 [readOnly]="readOnly" />
+          <mat-error *ngIf="editForm.controls.totalNumCovidPatientAdmitted?.errors?.required">
+            {{'validations.required' | translate}} only numbers are allowed</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" fxFlex="50">
+          <mat-label>No. of Covid patient admitted against 80% Isolation beds under Regulation
+          </mat-label>
+          <input
+                 type="number"
+                 placeholder="No. of Covid patient admitted against 80% Isolation beds under Regulation"
+                 matInput
+                 name="patientAdmitAgainstEightyIsoBeds"
+                 minlength="1" maxlength="150"
+                 min="0"
+                 [(ngModel)]="regulation.patientAdmitAgainstEightyIsoBeds" required
+                 [readOnly]="readOnly" />
+          <mat-error *ngIf="editForm.controls.patientAdmitAgainstEightyIsoBeds?.errors?.required">
+            {{'validations.required' | translate}} only numbers are allowed</mat-error>
+        </mat-form-field>
+      </div>
+      <!-- kkkkkkkkkkkk -->
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+        <mat-form-field appearance="outline" fxFlex="50">
+          <mat-label>Total No. of patients received bills as per the Rate Regulation Notification
+          </mat-label>
+          <input class="form-control" (input)="onSearchChang($event.target.value)"
+                 type="number"
+                 placeholder="Total No. of patients received bills as per the Rate Regulation Notification"
+                 matInput
+                 name="patientsRcvdRegularisedBill"
+                 minlength="1" maxlength="150"
+                 min="0"
+                 [(ngModel)]="regulation.patientsRcvdRegularisedBill" required
+                 [readOnly]="readOnly" />
+          <mat-error *ngIf="editForm.controls.patientsRcvdRegularisedBill?.errors?.required">
+            {{'validations.required' | translate}} only numbers are allowed</mat-error>
+        </mat-form-field>
+
+        <!-- jjjjjjjjjjjjjJ -->
+        <mat-form-field appearance="outline" fxFlex="50">
+          <mat-label>No. of Covid patient Discharged from 80% Isolation beds under regulation
+          </mat-label>
+          <input class="form-control" (input)="onSearchChang($event.target.value)"
+                 type="number"
+                 placeholder="No. of Covid patient Discharged from 80% Isolation beds under regulation"
+                 matInput
+                 name="patientsDischargedAgainstEightyIsoBeds"
+                 minlength="1" maxlength="150"
+                 min="0"
+                 [(ngModel)]="regulation.patientsDischargedAgainstEightyIsoBeds" required
+                 [readOnly]="readOnly" />
+          <mat-error
+                     *ngIf="editForm.controls.patientsDischargedAgainstEightyIsoBeds?.errors?.required">
+            {{'validations.required' | translate}} only numbers are allowed</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+
+
+        <mat-form-field appearance="outline" fxFlex="50">
+          <mat-label>Total No. of patients not received bills as per the Rate Regulation
+            Notification</mat-label>
+          <input
+                 type="number"
+                 placeholder="Total No. of patients not received bills as per the Rate Regulation Notification"
+                 matInput
+                 name="patientsNotRcvdRegularisedBill"
+                 minlength="1" maxlength="150"
+                 min="0"
+                 [(ngModel)]="regulation.patientsNotRcvdRegularisedBill" required
+                 [readOnly]="readOnly" />
+          <mat-error *ngIf="editForm.controls.patientsNotRcvdRegularisedBill?.errors?.required">
+            {{'validations.required' | translate}} only numbers are allowed</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" fxFlex="50">
+          <mat-label>No. of patients who received reimbursment</mat-label>
+          <input
+                 type="number"
+                 placeholder="No. of patients who received reimbursment"
+                 name="numPatientsReceivedReimbursment"
+                 minlength="1" maxlength="150"
+                 min="0"
+                 matInput
+                 [(ngModel)]="regulation.numPatientsReceivedReimbursment" required
+                 [readOnly]="readOnly" />
+          <mat-error *ngIf="editForm.controls.numPatientsReceivedReimbursment?.errors?.required">
+            {{'validations.required' | translate}} only numbers are allowed</mat-error>
+        </mat-form-field>
+
+
+      </div>
+
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+
+      </div>
+
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+        <mat-form-field appearance="outline" fxFlex="50">
+          <mat-label>No. of patients who received revised bills</mat-label>
+          <input
+                 type="number"
+                 placeholder="No. of patients who received revised bills"
+                 matInput
+                 name="patientReceivedRevisedBills"
+                 minlength="1" maxlength="150"
+                 min="0"
+                 [(ngModel)]="regulation.patientReceivedRevisedBills" required
+                 [readOnly]="readOnly" />
+          <mat-error *ngIf="editForm.controls.patientReceivedRevisedBills?.errors?.required">
+            {{'validations.required' | translate}} only numbers are allowed</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline" fxFlex="50">
+          <mat-label>No. of patients to be received reimbursement</mat-label>
+          <input
+                 type="number"
+                 placeholder="No. of patients to be received reimbursement"
+                 name="patientReceivedReimbursement"
+                 minlength="1" maxlength="150"
+                 min="0"
+                 matInput
+                 [(ngModel)]="regulation.patientReceivedReimbursement" required
+                 [readOnly]="readOnly" />
+          <mat-error *ngIf="editForm.controls.patientReceivedReimbursement?.errors?.required">
+            {{'validations.required' | translate}} only numbers are allowed</mat-error>
+        </mat-form-field>
+
+      </div>
+
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+        <!-- oooooooooo -->
+        <mat-form-field appearance="outline" fxFlex="50">
+          <mat-label>Total amount to be reimbursed (in Rs.)</mat-label>
+          <input class="form-control" (input)="onSearchChangeee($event.target.value)"
+                 type="number"
+                 placeholder="Total amount to be reimbursed (in Rs.)"
+                 matInput
+                 name="totalAmountReimbursed"
+                 minlength="1" maxlength="150"
+                 min="0"
+                 [(ngModel)]="regulation.totalAmountReimbursed" required [readOnly]="readOnly" />
+          <mat-error *ngIf="editForm.controls.totalAmountReimbursed?.errors?.required">
+            {{'validations.required' | translate}} only numbers are allowed</mat-error>
+        </mat-form-field>
+        <!-- qqqqqqqqqqqqqqq -->
+        <mat-form-field appearance="outline" fxFlex="50">
+          <mat-label>Actual amount reimbursed (in Rs.)</mat-label>
+          <input class="form-control" (input)="onSearchChangeee($event.target.value)"
+                 type="number"
+                 placeholder="Actual amount reimbursed (in Rs.)"
+                 matInput
+                 name="amountReimbursed"
+                 minlength="1" maxlength="150"
+                 min="0"
+                 [(ngModel)]="regulation.amountReimbursed" required [readOnly]="readOnly" />
+          <mat-error *ngIf="editForm.controls.amountReimbursed?.errors?.required">
+            {{'validations.required' | translate}} only numbers are allowed</mat-error>
+        </mat-form-field> 
+
+      </div>
+
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+
+        <mat-form-field appearance="outline" fxFlex="50">
+          <mat-label>Amount not reimbursed (in Rs.)</mat-label>
+          <input
+                 type="number"
+                 placeholder="Actual amount not reimbursed (in Rs.)"
+                 matInput
+                 name="amountNotReimbursed"
+                 minlength="1" maxlength="150"
+                 min="0"
+                 [(ngModel)]="regulation.amountNotReimbursed" required [readOnly]="readOnly" />
+          <mat-error *ngIf="editForm.controls.amountNotReimbursed?.errors?.required">
+            {{'validations.required' | translate}} only numbers are allowed</mat-error>
+        </mat-form-field>
+
+      </div>
+
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="100px" fxLayoutGap.lt-md="0px">
+        <mat-form-field appearance="outline" fxFlex="50">
+          <mat-label>Auditor's Remarks</mat-label>
+          <input
+                 placeholder="Auditor's Remarks"
+                 matInput
+                 type="text"
+                 minlength="1" maxlength="150"
+                 min="0"
+                 name="auditorRemark"
+                 [(ngModel)]="regulation.auditorRemark" required [readOnly]="readOnly" />
+          <mat-error *ngIf="editForm.controls.auditorRemark?.errors?.required">
+            {{'validations.required' | translate}} </mat-error>
+        </mat-form-field>       
+      </div>
+
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+
+        <mat-form-field appearance="outline" fxFlex="50">
+          <mat-label>Compliance Status</mat-label>
+          <mat-select disableRipple name="oxygenType" [(ngModel)]="regulation.complianceStatus">
+            <mat-option value="true">True</mat-option>
+            <mat-option value="false">False</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+
+    </form>
+    <div mat-dialog-actions align="end">
+
+      <button
+              mat-raised-button
+              color="primary"
+              class="m-t-8"
+              (click)="save()"
+              [disabled]="editForm.form.invalid">
+        Save</button>&nbsp;&nbsp; &nbsp;&nbsp;
+      <button mat-raised-button mat-dialog-close color="warn" class="m-t-8" [disabled]="isSaving">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>

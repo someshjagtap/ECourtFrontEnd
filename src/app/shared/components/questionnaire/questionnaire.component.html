@@ -1,0 +1,61 @@
+<!-- <div ngModelGroup="{{modelGroupName}}"> -->
+<!-- <div > -->
+<form [formGroup]="appraisalApplyForm" class="">
+  <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+    <div fxFlex="4" style="text-align: center;">
+      <h3>Sr.No</h3>
+    </div>
+    <div fxFlex="40">
+      <h3>Description</h3>
+    </div>
+    <div fxFlex="20">
+      <h3>Compliance</h3>
+    </div>
+    <div fxFlex="35">
+      <h3>Remarks</h3>
+    </div>
+  </div>
+  &nbsp;
+
+
+  <div formArrayName="questionnaireTableForm">
+    <div *ngFor="
+            let questionnaireTableForm of appraisalApplyForm.get('questionnaireTableForm')[
+              'controls'
+            ];
+            let i = index
+          ">
+      <form [formGroup]="questionnaireTableForm" (ngSubmit)="submitApplyAppraisal(questionnaireTableForm.value)">
+
+        <div fxLayout="row" style="display: flex; justify-content: center; align-items: center; flex-direction: column;"  fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+          <mat-label fxFlex="4" >{{ data[i].serial_no }}</mat-label>
+          <mat-label fxFlex="40">
+            <p class="e2e-inner-html-bound" [innerHTML]="data[i].description"></p>
+          </mat-label>
+          <mat-form-field appearance="outline" fxFlex="20">
+            <mat-label i18n>Compliance</mat-label>
+            <mat-select [disabled]="crudOperation =='view'" class="form-control" name="compliance"
+                        id="compliance_{{ i }}"
+                        formControlName="compliance" required>
+              <mat-option value="yes" i18n>Yes</mat-option>
+              <mat-option value="no" i18n>No</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline" fxFlex="35">
+            <input matInput class="form-control" id="remarks_{{ i }}"
+                   placeholder="Remarks" [readonly]="crudOperation =='view'"
+                   formControlName="remarks" />
+          </mat-form-field>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div *ngIf="crudOperation !='view' ">
+    <button mat-raised-button type="button" (click)="onClick(appraisalApplyForm.value)"
+            color="primary" [disabled]="(appraisalApplyForm.invalid && isSaving) || hasDone">
+      Submit Data
+    </button>&nbsp;&nbsp;
+  </div>
+</form>
+<!-- <pre>{{ appraisalApplyForm.value | json }}</pre> -->
+<!-- </div> -->

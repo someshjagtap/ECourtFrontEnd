@@ -1,0 +1,93 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm"
+      class="form-field-full">
+  <div fxLayout="row wrap" class="matero-row">
+    <div fxFlex="100.67" fxFlex.lt-sm="100" class="matero-col">
+      <mat-card>
+        <mat-card-title>{{ detail.id != null ? 'Edit' : 'Create' }} User </mat-card-title>
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="50" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>First Name</mat-label>
+              <input matInput placeholder="Name" name="name" [(ngModel)]="detail.firstName"
+                     pattern="^[a-zA-Z\s.]{2,150}$" minlength="2" maxlength="150" required />
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="50" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>Last Name</mat-label>
+              <input matInput placeholder="Last Name" name="lname" [(ngModel)]="detail.lastName"
+                     pattern="^[a-zA-Z\s.]{2,150}$" minlength="2" maxlength="150" required />
+            </mat-form-field>
+          </div>
+          <div fxFlex="100" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>Username</mat-label>
+              <input matInput placeholder="Username" name="Username" [(ngModel)]="detail.login"
+                     minlength="2"
+                     maxlength="150" [disabled]="detail.id" required lowercase/>
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="50" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>Mobile No. (For OTP)</mat-label>
+              <input matInput placeholder="Mobile No." type="tel" pattern="^[0-9]{10,10}$" min="10"
+                     max="10" positivenumbers name="mobileNo" [(ngModel)]="detail.mobileNo"
+                     required />
+              <mat-icon matSuffix>smartphone</mat-icon>
+              <mat-error *ngIf="editForm.controls.mobileNo?.errors?.required">
+                {{ 'validations.required' | translate }}
+              </mat-error>
+              <mat-error *ngIf="editForm.controls.mobileNo?.errors?.pattern">
+                Mobile No should be 10 digit.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div fxFlex="50" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="email" name="email" [(ngModel)]="detail.email"
+                     pattern="(?![_.-])((?![_.-][_.-])[a-z\d_.-]){0,63}[a-z\d]@(?!-)((?!--)[a-z\d-]){0,63}[a-z\d]\.(((?!-)((?!--)[a-z\d-]){0,63}[a-z\d]\.)|)(([a-z]{2,14}\.)|)[a-z]{2,14}" />
+              <mat-error *ngIf="editForm.controls.email?.errors?.required">
+                {{ 'validations.required' | translate }}
+              </mat-error>
+              <mat-error *ngIf="editForm.controls.email?.errors?.pattern">
+                Enter Valid Email
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div fxFlex="100" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>Password</mat-label>
+              <input matInput placeholder="Password" name="passwordHash"
+                     [(ngModel)]="detail.passwordHash" type="password"
+                     minlength="2" maxlength="150" required />
+            </mat-form-field>
+            <password-strength-bar [passwordToCheck]="detail.passwordHash"></password-strength-bar>
+          </div>
+
+          <div fxFlex="100" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>Confirm Password</mat-label>
+              <input matInput placeholder="Confirm Password" name="conpassword"
+                     [(ngModel)]="detail.conpassword" type="password"
+                     minlength="2" maxlength="150" required />
+            </mat-form-field>
+          </div>
+          <mat-error
+                     *ngIf="detail.passwordHash!=null && detail.conpassword!=null && detail.passwordHash!=detail.conpassword">
+            The password and its confirmation do not match!
+          </mat-error>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+
+  <button mat-raised-button color="primary" class="m-t-8" type="submit"
+          [disabled]="editForm.form.invalid || detail.passwordHash!=detail.conpassword || isSaving ">
+    Save</button>&nbsp;&nbsp;
+  <button mat-raised-button color="warn" type="button" class="m-t-8" (click)="previousState()"
+          [disabled]="isSaving"> Cancel
+  </button>
+</form>

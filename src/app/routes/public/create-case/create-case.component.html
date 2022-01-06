@@ -1,0 +1,846 @@
+<page-header></page-header>
+<form
+      name="courtCase"
+      role="form"
+      novalidate
+      (ngSubmit)="save()"
+      #courtCase="ngForm"
+      class="form-field-full">
+  <div fxLayout="row wrap" class="matero-row">
+    <div fxFlex="100.67" fxFlex.lt-sm="100" class="matero-col">
+      <mat-card>
+        <!-- <mat-card-title>{{detail.id? 'Edit' : 'Create' }} Case</mat-card-title> -->
+        <mat-card-title>{{ detail.id !== undefined ? 'Edit' : 'Create' }}
+          {{ search['supplierType.equals'] }}</mat-card-title>
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <!--  <div fxFlex="50" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>ID</mat-label>
+              <input
+                     matInput
+                     placeholder="id"
+                     name="id"
+                     [(ngModel)]="detail.id"
+                     pattern="^[0-9\s.]{2,150}$"
+                     minlength="2"
+                     maxlength="10"
+                     required />
+            </mat-form-field>
+          </div> -->
+
+          <div fxFlex="50" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>Case No</mat-label>
+              <input
+                     matInput
+                     placeholder="caseNo"
+                     name="caseNo"
+                     [(ngModel)]="detail.caseNo"
+                     pattern="^[0-9\s.]{2,150}$"
+                     minlength="2"
+                     maxlength="10"
+                     required />
+              <mat-error *ngIf="courtCase.controls.caseNo?.errors?.required">
+                {{ 'validations.required' | translate }}
+              </mat-error>
+            </mat-form-field>
+            <!-- <mat-form-field>
+              <mat-label>Supplier Type</mat-label>
+              <mat-select
+                          name="supplierType"
+                          [(ngModel)]="detail.supplierType"
+                          required
+                          [disabled]="true">
+                <mat-option>-- None --</mat-option>
+                <mat-option value="REFILLER">Refiller</mat-option>
+                <mat-option value="DISTRIBUTOR">Distributor</mat-option>
+                <mat-option value="MANUFACTURER">Manufacturer</mat-option>
+                <mat-option value="DEALER">Dealer</mat-option>
+                <mat-option value="INDUSTRY">O2 Consuming Industry</mat-option>
+              </mat-select>
+              <mat-error *ngIf="courtCase.controls.supplierType?.errors?.required">
+                {{ 'validations.required' | translate }}
+              </mat-error>
+            </mat-form-field> -->
+          </div>
+
+          <div fxFlex="50" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>village Name</mat-label>
+              <input
+                     matInput
+                     placeholder="Village Name"
+                     [(ngModel)]="detail.villageName"
+                     name="villageName"
+                     required
+                     pattern="^[a-zA-Z\s.,]{2,50}$"
+                     minlength="1"
+                     maxlength="50"
+                     type="text" />
+              <mat-error *ngIf="courtCase.controls.villageName?.errors?.required">
+                {{ 'validations.required' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- <div fxFlex="50" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>Supplier Category</mat-label>
+              <mat-select name="inventoryType" [(ngModel)]="detail.inventoryTypeId" required
+                          [disabled]="detail.id!=null">
+                <mat-option>-- None --</mat-option>
+                <mat-option *ngFor="let lov of inventoryTypeLOV" [value]="lov.id">
+                  {{lov.name}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="courtCase.controls.inventoryType?.errors?.required">
+                {{'validations.required' | translate}}
+              </mat-error>
+            </mat-form-field>
+          </div> -->
+
+          <div fxFlex="50" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>Accuser Name</mat-label>
+              <input
+                     matInput
+                     placeholder="Accuser Name"
+                     [(ngModel)]="detail.accuserName"
+                     name="accuserName"
+                     required
+                     pattern="^[a-zA-Z\s.,]{2,50}$"
+                     minlength="1"
+                     maxlength="50"
+                     type="text" />
+              <mat-error *ngIf="courtCase.controls.accuserName?.errors?.required">
+                {{ 'validations.required' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <!-- <div fxFlex="50" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>Latitude</mat-label>
+              <input matInput placeholder="Latitude" name="lat" [(ngModel)]="detail.latitude" />
+              <!-- <mat-error *ngIf="reactiveForm2.get('email').invalid">
+              {{getErrorMessage(reactiveForm2) | translate}}
+            </mat-error>
+            </mat-form-field>
+          </div> -->
+
+          <div fxFlex="50" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>Application No</mat-label>
+              <input
+                     matInput
+                     placeholder="Application No"
+                     name="applicationNo"
+                     [(ngModel)]="detail.applicationNo"
+                     pattern="^[0-9\s.]{2,150}$"
+                     minlength="2"
+                     maxlength="10"
+                     required />
+              <mat-error *ngIf="courtCase.controls.applicationNo?.errors?.required">
+                {{ 'validations.required' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- <div fxFlex="50" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>Longitude</mat-label>
+              <input matInput placeholder="Longitude" name="long" [(ngModel)]="detail.longitude" />
+               <mat-error *ngIf="reactiveForm2.get('email').invalid">
+              {{getErrorMessage(reactiveForm2) | translate}}
+            </mat-error>
+            </mat-form-field>
+          </div> -->
+
+          <!-- <div fxFlex="50" fxFlex.lt-sm="100">
+                        <mat-form-field>
+                          <input matInput [matDatepicker]="picker2" placeholder="Choose a date"
+                                 formControlName="date">
+                          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                          <mat-datepicker #picker2></mat-datepicker>
+                        </mat-form-field>
+                      </div> -->
+        </div>
+      </mat-card>
+    </div>
+  </div>
+  <div fxLayout="row wrap" class="matero-row">
+    <div fxFlex="100.67" fxFlex.lt-sm="100" class="matero-col">
+      <mat-card>
+        <mat-card-title>Land Reference No</mat-card-title>
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          <div fxFlex="50" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>Land Reference No</mat-label>
+              <input
+                     matInput
+                     placeholder="Land Reference No"
+                     [(ngModel)]="detail.landReferenceNo"
+                     name="landReferenceNo"
+                     required
+                     pattern="^[a-zA-Z0-9\s.,]{2,50}$"
+                     minlength="1"
+                     maxlength="50"
+                     type="text" />
+              <mat-error *ngIf="courtCase.controls.landReferenceNo?.errors?.required">
+                {{ 'validations.required' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="50" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>First Appeal</mat-label>
+              <input
+                     matInput
+                     placeholder="First Appeal"
+                     [(ngModel)]="detail.firstAppeal"
+                     name="firstAppeal"
+                     pattern="^[a-zA-Z0-9\s.,]{2,50}$"
+                     minlength="2"
+                     maxlength="50"
+                     type="text" />
+              <mat-error *ngIf="courtCase.controls.firstAppeal?.errors?.required">
+                {{ 'validations.required' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="50" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>Amount</mat-label>
+              <input
+                     matInput
+                     placeholder="Amount"
+                     [(ngModel)]="detail.amount"
+                     name="amount"
+                     pattern="^[0-9\s.,]{2,50}$"
+                     minlength="2"
+                     maxlength="50"
+                     positivenumbers
+                     min="0"
+                     type="number" />
+              <mat-error *ngIf="courtCase.controls.amount?.errors?.required">
+                {{ 'validations.required' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="50" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>Project Name</mat-label>
+              <input
+                     matInput
+                     placeholder="Project Name"
+                     [(ngModel)]="detail.projectName"
+                     name="projectName"
+                     pattern="^[a-zA-Z\s.,]{2,50}$"
+                     minlength="1"
+                     maxlength="50"
+                     type="text" />
+              <mat-error *ngIf="courtCase.controls.projectName?.errors?.required">
+                {{ 'validations.required' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="50" fxFlex.lt-sm="100">
+            <!-- <mat-form-field>
+              <mat-label>District</mat-label>
+              <!-- <mat-select required [(ngModel)]="detail.districtId" name="districtId"
+                              (selectionChange)="selectedDistrict($event)" >
+                    <mat-option>-- None --</mat-option>
+                    <mat-option *ngFor="let district of districtList" [value]="district.id">
+                      {{district.name}}</mat-option>
+                  </mat-select>
+              <mtx-select
+                          [items]="districtList"
+                          groupBy="divisionName"
+                          name="districtId"
+                          [(ngModel)]="search['districtId.equals']"
+                          (change)="selectedDistrict('districtId.equals')"
+                          bindLabel="name"
+                          bindValue="id"
+                          appendTo="body"
+                          required>
+                <ng-template
+                             ng-option-tmp
+                             let-item="item"
+                             let-index="index"
+                             let-search="searchTerm">
+                  <div [ngOptionHighlight]="search">{{ item.name }}</div>
+                </ng-template>
+              </mtx-select>
+              <mat-error *ngIf="courtCase.controls.districtId?.errors?.required">
+                {{ 'validations.required' | translate }}
+              </mat-error>
+            </mat-form-field> -->
+
+            <mat-form-field>
+              <mat-label>Court Name</mat-label>
+              <input
+                     matInput
+                     placeholder="Court Name"
+                     [(ngModel)]="detail.courtName"
+                     name="courtName"
+                     pattern="^[a-zA-Z\s.,]{2,50}$"
+                     minlength="1"
+                     maxlength="50"
+                     type="text" />
+              <mat-error *ngIf="courtCase.controls.courtName?.errors?.required">
+                {{ 'validations.required' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="50" fxFlex.lt-sm="100">
+            <!-- <mat-form-field>
+              <mat-label>Taluka</mat-label>
+              <!-- <mat-select [(ngModel)]="detail.talukaId" name="talukaId"
+                              (selectionChange)="selectedTaluka($event)" required >
+                    <mat-option>-- None --</mat-option>
+                    <mat-option *ngFor="let taluka of talukaList" [value]="taluka.id">{{taluka.name}}
+                    </mat-option>
+                  </mat-select>
+              <mtx-select
+                          [items]="talukaList"
+                          groupBy="districtName"
+                          name="talukaId"
+                          [(ngModel)]="search['talukaId.equals']"
+                          (change)="selectedTaluka('talukaId.equals')"
+                          bindLabel="name"
+                          bindValue="id"
+                          appendTo="body">
+                <ng-template
+                             ng-option-tmp
+                             let-item="item"
+                             let-index="index"
+                             let-search="searchTerm">
+                  <div [ngOptionHighlight]="search">{{ item.name }}</div>
+                </ng-template>
+              </mtx-select>
+              <mat-error *ngIf="courtCase.controls.talukaId?.errors?.required">
+                {{ 'validations.required' | translate }}
+              </mat-error>
+            </mat-form-field> -->
+
+            <mat-form-field>
+              <mat-label>Defendant Name</mat-label>
+              <input
+                     matInput
+                     placeholder="Defendant Name"
+                     [(ngModel)]="detail.defendantName"
+                     name="defendantName"
+                     pattern="^[a-zA-Z\s.,]{2,50}$"
+                     minlength="1"
+                     maxlength="50"
+                     type="text" />
+              <mat-error *ngIf="courtCase.controls.defendantName?.errors?.required">
+                {{ 'validations.required' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="50" fxFlex.lt-sm="100">
+            <!--  <mat-form-field>
+              <mat-label>City/Village</mat-label>
+             <mat-select  [(ngModel)]="detail.cityId" name="cityId"
+                              (selectionChange)="selectedCity($event)" >
+                    <mat-option>-- None --</mat-option>
+                    <mat-option *ngFor="let city of cityList" [value]="city.id">{{city.name}}
+                    </mat-option>
+                  </mat-select>
+              <mtx-select
+                          [items]="cityList"
+                          groupBy="talukaName"
+                          name="cityId"
+                          [(ngModel)]="search['cityId.equals']"
+                          (change)="selectedCity('cityId.equals')"
+                          bindLabel="name"
+                          bindValue="id"
+                          appendTo="body">
+                <ng-template
+                             ng-option-tmp
+                             let-item="item"
+                             let-index="index"
+                             let-search="searchTerm">
+                  <div [ngOptionHighlight]="search">{{ item.name }}</div>
+                </ng-template>
+              </mtx-select>
+              <!-- <mat-error *ngIf="courtCase.controls.cityId?.errors?.required">
+                    {{'validations.required' | translate}}
+                  </mat-error>
+            </mat-form-field> -->
+
+            <mat-form-field>
+              <mat-label>Case Description</mat-label>
+              <input
+                     matInput
+                     placeholder="Case Description"
+                     [(ngModel)]="detail.caseDescription"
+                     name="caseDescription"
+                     pattern="^[a-zA-Z\s.,]{2,50}$"
+                     minlength="1"
+                     maxlength="50"
+                     type="text" />
+              <mat-error *ngIf="courtCase.controls.caseDescription?.errors?.required">
+                {{ 'validations.required' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="50" fxFlex.lt-sm="100">
+
+            <mat-form-field>
+              <mat-placeholder>Case Filing Date</mat-placeholder>
+              <mat-datetimepicker-toggle [for]="datetimePicker" matSuffix>
+              </mat-datetimepicker-toggle>
+              <mat-datetimepicker #datetimePicker openOnFocus="true" startView="month"
+                                  timeInterval="5"
+                                  type="datetime"></mat-datetimepicker>
+              <input [matDatetimepicker]="datetimePicker"
+                     autocomplete="false"
+                     name="caseFilingDate"
+                     [(ngModel)]="detail.caseFilingDate"
+                     #dateModel="ngModel"
+                     aria-label="Case Filing Date"
+                     matInput
+                     [readonly]="true">
+            </mat-form-field>
+            <div
+                 *ngIf="!dateModel?.valid && (dateModel?.dirty || dateModel?.touched)">
+
+              <div *ngIf="dateModel?.errors?.required" style="margin-left: 5px; color: red;">
+                {{ "validations.required" | translate }}
+              </div>
+              <div *ngIf="dateModel?.errors?.pattern" style="margin-left: 5px; color: red;">
+                Invalid Date
+              </div>
+            </div>
+
+
+          </div>
+
+          <div fxFlex="50" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>Total Claim Amount</mat-label>
+              <input
+                     matInput
+                     placeholder="Total Claim Amount"
+                     [(ngModel)]="detail.totalClaimAmount"
+                     name="totalClaimAmount"
+                     pattern="^[0-9\s.,]{2,50}$"
+                     minlength="1"
+                     maxlength="50"
+                     type="text" />
+              <mat-error *ngIf="courtCase.controls.totalClaimAmount?.errors?.required">
+                {{ 'validations.required' | translate }}
+              </mat-error>
+              <mat-error *ngIf="courtCase.controls.totalClaimAmount?.errors?.pattern">
+                Claim Amount should be 6 digit.
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card>
+
+    <mat-card>
+      <div fxLayout="row wrap" fxLayoutGap="8px grid">
+        <div fxFlex="50" fxFlex.lt-sm="100">
+          <mat-form-field>
+            <mat-label>Case Officer</mat-label>
+            <input
+                   matInput
+                   placeholder="Case Officer"
+                   [(ngModel)]="detail.caseOfficer"
+                   name="caseOfficer"
+                   pattern="^[a-zA-Z\s.,]{2,50}$"
+                   minlength="1"
+                   maxlength="50"
+                   type="text" />
+            <mat-error *ngIf="courtCase.controls.caseOfficer?.errors?.required">
+              {{ 'validations.required' | translate }}
+            </mat-error>
+            <mat-error *ngIf="courtCase.controls.caseOfficer?.errors?.pattern">
+              Only String
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="50" fxFlex.lt-sm="100">
+          <mat-form-field>
+            <mat-label>Case Lawyer</mat-label>
+            <input
+                   matInput
+                   placeholder="Case Lawyer"
+                   [(ngModel)]="detail.caselawyer"
+                   name="caselawyer"
+                   pattern="^[a-zA-Z\s.,]{2,50}$"
+                   minlength="1"
+                   maxlength="50"
+                   type="text" />
+            <mat-error *ngIf="courtCase.controls.caselawyer?.errors?.required">
+              {{ 'validations.required' | translate }}
+            </mat-error>
+            <mat-error *ngIf="courtCase.controls.caselawyer?.errors?.pattern">
+              Only String
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="50" fxFlex.lt-sm="100">
+          <mat-form-field>
+            <mat-placeholder>Next Hearing Date</mat-placeholder>
+            <mat-datetimepicker-toggle [for]="datetimePicker2" matSuffix></mat-datetimepicker-toggle>
+            <mat-datetimepicker #datetimePicker2 openOnFocus="true" startView="month" timeInterval="5"
+                                type="datetime"></mat-datetimepicker>
+            <input [matDatetimepicker]="datetimePicker2"
+                   autocomplete="false"
+                   name="nextHearingDate"
+                   [(ngModel)]="detail.nextHearingDate"
+                   #dateModel="ngModel"
+                   aria-label="Next Hearing Date"
+                   matInput
+                   [readonly]="true">
+          </mat-form-field>
+          <div
+               *ngIf="!dateModel?.valid && (dateModel?.dirty || dateModel?.touched)">
+
+            <div *ngIf="dateModel?.errors?.required" style="margin-left: 5px; color: red;">
+              {{ "validations.required" | translate }}
+            </div>
+            <div *ngIf="dateModel?.errors?.pattern" style="margin-left: 5px; color: red;">
+              Invalid Date
+            </div>
+          </div>
+        </div>
+
+        <div fxFlex="50" fxFlex.lt-sm="100">
+          <mat-form-field>
+            <mat-label>Amount Deposite in Court</mat-label>
+            <input
+                   matInput
+                   placeholder="Amount Deposite in Court"
+                   [(ngModel)]="detail.amountDepositeInCourt"
+                   name="amountDepositeInCourt"
+                   pattern="^[0-9\s.,]{2,50}$"
+                   min="0"
+                   maxlength="50"
+                   positivenumbers
+                   type="number" />
+            <mat-error *ngIf="courtCase.controls.amountDepositeInCourt?.errors?.required">
+              {{ 'validations.required' | translate }}
+            </mat-error>
+            <mat-error *ngIf="courtCase.controls.amountDepositeInCourt?.errors?.pattern">
+              Only Numbers
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="50" fxFlex.lt-sm="100">
+          <mat-form-field>
+            <mat-label>LAR</mat-label>
+            <input
+                   matInput
+                   placeholder="LAR"
+                   [(ngModel)]="detail.lar"
+                   name="lar"
+                   pattern="^[a-zA-Z\s.,]{2,50}$"
+                   minlength="1"
+                   maxlength="50"
+                   type="text" />
+            <mat-error *ngIf="courtCase.controls.lar?.errors?.required">
+              {{ 'validations.required' | translate }}
+            </mat-error>
+            <mat-error *ngIf="courtCase.controls.lar?.errors?.pattern">
+              Only String
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="50" fxFlex.lt-sm="100">
+          <mat-form-field>
+            <mat-label>INC Compensation</mat-label>
+            <input
+                   matInput
+                   placeholder="INC Compensation"
+                   [(ngModel)]="detail.incCompensation"
+                   name="incCompensation"
+                   pattern="^[a-zA-Z\s.,]{2,50}$"
+                   minlength="1"
+                   maxlength="50"
+                   type="text" />
+            <mat-error *ngIf="courtCase.controls.incCompensation?.errors?.required">
+              {{ 'validations.required' | translate }}
+            </mat-error>
+            <mat-error *ngIf="courtCase.controls.incCompensation?.errors?.pattern">
+              Only String
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="50" fxFlex.lt-sm="100">
+          <mat-form-field>
+            <mat-label>Amount Paid to SLO</mat-label>
+            <input
+                   matInput
+                   placeholder="Amount Paid to SLO"
+                   [(ngModel)]="detail.amountPaidSLO"
+                   name="amountPaidSLO"
+                   pattern="^[0-9\s.,]{2,50}$"
+                   min="0"
+                   maxlength="50"
+                   positivenumbers
+                   type="number" />
+            <mat-error *ngIf="courtCase.controls.amountPaidSLO?.errors?.required">
+              {{ 'validations.required' | translate }}
+            </mat-error>
+            <mat-error *ngIf="courtCase.controls.amountPaidSLO?.errors?.pattern">
+              Invalid Amount
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="50" fxFlex.lt-sm="100">
+          <mat-form-field>
+            <mat-label>Cheque No</mat-label>
+            <input
+                   matInput
+                   placeholder="Cheque No"
+                   [(ngModel)]="detail.chequeNo"
+                   name="chequeNo"
+                   pattern="^[0-9\s.,]{2,50}$"
+                   min="0"
+                   maxlength="50"
+                   positivenumbers
+                   type="number" />
+            <mat-error *ngIf="courtCase.controls.chequeNo?.errors?.required">
+              {{ 'validations.required' | translate }}
+            </mat-error>
+            <mat-error *ngIf="courtCase.controls.chequeNo?.errors?.pattern">
+              Invalid Amount
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="50" fxFlex.lt-sm="100">
+          <mat-form-field>
+            <mat-placeholder>Cheque Date</mat-placeholder>
+            <mat-datetimepicker-toggle [for]="datetimePicker3" matSuffix></mat-datetimepicker-toggle>
+            <mat-datetimepicker #datetimePicker3 openOnFocus="true" startView="month" timeInterval="5"
+                                type="datetime"></mat-datetimepicker>
+            <input [matDatetimepicker]="datetimePicker3"
+                   autocomplete="false"
+                   name="chequeDate"
+                   [(ngModel)]="detail.chequeDate"
+                   #dateModel="ngModel"
+                   aria-label="Next Hearing Date"
+                   matInput
+                   [readonly]="true">
+          </mat-form-field>
+          <div
+               *ngIf="!dateModel?.valid && (dateModel?.dirty || dateModel?.touched)">
+
+            <div *ngIf="dateModel?.errors?.required" style="margin-left: 5px; color: red;">
+              {{ "validations.required" | translate }}
+            </div>
+            <div *ngIf="dateModel?.errors?.pattern" style="margin-left: 5px; color: red;">
+              Invalid Date
+            </div>
+          </div>
+        </div>
+
+        <div fxFlex="50" fxFlex.lt-sm="100">
+          <mat-form-field>
+            <mat-label>Appeal No</mat-label>
+            <input
+                   matInput
+                   placeholder="Appeal No"
+                   [(ngModel)]="detail.appealNo"
+                   name="appealNo"
+                   pattern="^[0-9\s.,]{2,50}$"
+                   min="0"
+                   maxlength="50"
+                   positivenumbers
+                   type="number" />
+            <mat-error *ngIf="courtCase.controls.appealNo?.errors?.required">
+              {{ 'validations.required' | translate }}
+            </mat-error>
+            <mat-error *ngIf="courtCase.controls.appealNo?.errors?.pattern">
+              Invalid Numbber
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="50" fxFlex.lt-sm="100">
+          <mat-form-field>
+            <mat-label>Court Amount</mat-label>
+            <input
+                   matInput
+                   placeholder="Court Amount"
+                   [(ngModel)]="detail.courtAmount"
+                   name="courtAmount"
+                   pattern="^[0-9\s.,]{2,50}$"
+                   min="0"
+                   maxlength="50"
+                   positivenumbers
+                   type="number" />
+            <mat-error *ngIf="courtCase.controls.courtAmount?.errors?.required">
+              {{ 'validations.required' | translate }}
+            </mat-error>
+            <mat-error *ngIf="courtCase.controls.courtAmount?.errors?.pattern">
+              Invalid Amount
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="50" fxFlex.lt-sm="100">
+          <mat-form-field>
+            <mat-label>Appeal Amount</mat-label>
+            <input
+                   matInput
+                   placeholder="Appeal Amount"
+                   [(ngModel)]="detail.appealAmount"
+                   name="appealAmount"
+                   pattern="^[0-9\s.,]{2,50}$"
+                   min="0"
+                   maxlength="50"
+                   positivenumbers
+                   type="number" />
+            <mat-error *ngIf="courtCase.controls.appealAmount?.errors?.required">
+              {{ 'validations.required' | translate }}
+            </mat-error>
+            <mat-error *ngIf="courtCase.controls.appealAmount?.errors?.pattern">
+              Invalid Amount
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="50" fxFlex.lt-sm="100">
+          <mat-form-field>
+            <mat-placeholder>Cheque Date</mat-placeholder>
+            <mat-datetimepicker-toggle [for]="datetimePicker4" matSuffix></mat-datetimepicker-toggle>
+            <mat-datetimepicker #datetimePicker4 openOnFocus="true" startView="month" timeInterval="5"
+                                type="datetime"></mat-datetimepicker>
+            <input [matDatetimepicker]="datetimePicker4"
+                   autocomplete="false"
+                   name="appealDate"
+                   [(ngModel)]="detail.appealDate"
+                   #dateModel="ngModel"
+                   aria-label="Next Hearing Date"
+                   matInput
+                   [readonly]="true">
+          </mat-form-field>
+          <div
+               *ngIf="!dateModel?.valid && (dateModel?.dirty || dateModel?.touched)">
+
+            <div *ngIf="dateModel?.errors?.required" style="margin-left: 5px; color: red;">
+              {{ "validations.required" | translate }}
+            </div>
+            <div *ngIf="dateModel?.errors?.pattern" style="margin-left: 5px; color: red;">
+              Invalid Date
+            </div>
+          </div>
+        </div>
+
+        <div fxFlex="50" fxFlex.lt-sm="100">
+          <mat-form-field>
+            <mat-label>Description</mat-label>
+            <input
+                   matInput
+                   placeholder="Description"
+                   [(ngModel)]="detail.description"
+                   name="description"
+                   pattern="^[a-zA-Z\s.,]{2,50}$"
+                   minlength="1"
+                   maxlength="50"
+                   type="text" />
+            <mat-error *ngIf="courtCase.controls.description?.errors?.required">
+              {{ 'validations.required' | translate }}
+            </mat-error>
+            <mat-error *ngIf="courtCase.controls.description?.errors?.pattern">
+              Only String
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="50" fxFlex.lt-sm="100">
+          <mat-form-field>
+            <mat-label>Comment</mat-label>
+            <input
+                   matInput
+                   placeholder="Comment"
+                   [(ngModel)]="detail.comment"
+                   name="comment"
+                   pattern="^[a-zA-Z\s.,]{2,50}$"
+                   minlength="1"
+                   maxlength="50"
+                   type="text" />
+            <mat-error *ngIf="courtCase.controls.comment?.errors?.required">
+              {{ 'validations.required' | translate }}
+            </mat-error>
+            <mat-error *ngIf="courtCase.controls.comment?.errors?.pattern">
+              Only String
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="50" fxFlex.lt-sm="100">
+          <mat-form-field>
+            <mat-label>Case Status</mat-label>
+            <input
+                   matInput
+                   placeholder="Case Status"
+                   [(ngModel)]="detail.caseStatus"
+                   name="caseStatus"
+                   pattern="^[a-zA-Z\s.,]{2,50}$"
+                   minlength="1"
+                   maxlength="50"
+                   type="text" />
+            <mat-error *ngIf="courtCase.controls.caseStatus?.errors?.required">
+              {{ 'validations.required' | translate }}
+            </mat-error>
+            <mat-error *ngIf="courtCase.controls.caseStatus?.errors?.pattern">
+              Only String
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+      </div>
+    </mat-card>
+
+      <button
+              mat-raised-button
+              color="primary"
+              class="m-t-8"
+              type="submit"
+              *ngIf="crudOperation != 'View'"
+              [disabled]="courtCase.form.invalid || isSaving">
+        Save</button>&nbsp;&nbsp;
+      <button
+              mat-raised-button
+              color="warn"
+              type="button"
+              class="m-t-8"
+              (click)="previousState()"
+              [disabled]="isSaving">
+        Cancel
+      </button>
+      &nbsp;&nbsp;
+      <button
+              *ngIf="crudOperation == 'View'"
+              mat-raised-button
+              color="primary"
+              class="m-t-8"
+              (click)="edit(detail)">
+        Edit</button>&nbsp;&nbsp;
+      <!-- <button mat-raised-button color="danger" class="m-t-8" *ngIf="detail.id"
+                    (click)="delete(detail.id)"
+                    [disabled]="isSaving">Delete</button>
+     -->
+
+    </div>
+  </div>
+</form>

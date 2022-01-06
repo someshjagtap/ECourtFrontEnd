@@ -1,0 +1,353 @@
+<div fxLayout="row wrap" class="matero-row">
+  <div fxFlex="100" class="matero-col">
+    <mat-card-title>{{ 'Enter the details for form1B' }}</mat-card-title>
+
+    <form
+      name="editForm"
+      role="form"
+      class="form-field-full"
+      (ngSubmit)="save()"
+      #editForm="ngForm"
+    >
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+      <mat-form-field  appearance="outline" fxFlex="50">
+        <mat-label>No. of Active Covid Patients in Dist</mat-label>
+        <input
+        type="number" positivenumbers
+          placeholder="No. of Active Covid Patients in Dist"
+          matInput
+          name="activeCovidPatientCount"
+          minlength="1" maxlength="150"
+          min="0"
+          [(ngModel)]="formoneB.activeCovidPatientCount" required [readOnly]="readOnly"
+          />
+          <mat-error *ngIf="editForm.controls.activeCovidPatientCount?.errors?.required">
+          {{'validations.required' | translate}} only numbers are allowed</mat-error>
+      </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+      <mat-form-field  appearance="outline" fxFlex="50">
+        <mat-label>No. of Covid +ve Patients admitted in health facility on oxygen</mat-label>
+        <input
+        type="number" positivenumbers
+          placeholder="No. of Covid +ve Patients admitted in health facility on oxygen"
+          matInput
+          name="numOfPatientsInhealthfacility" type="number" positivenumbers
+          minlength="2" maxlength="150"
+          min="0"
+          minlength="2" maxlength="150"
+
+            [(ngModel)]="formoneB.numOfPatientsInhealthfacility" required [readOnly]="readOnly"
+          />
+           <mat-error *ngIf="editForm.controls.numOfPatientsInhealthfacility?.errors?.required">
+            {{'validations.required' | translate}} only numbers are allowed</mat-error>
+        </mat-form-field>
+
+      <mat-form-field  appearance="outline" fxFlex="50">
+        <mat-label>Utilisation of oxygen (in CM)</mat-label>
+        <input
+        type="number" positivenumbers
+          placeholder="Utilisation of oxygen (in CM)"
+          matInput
+          name="oxygenUtilisationForPatientsInhealthfacility"
+          minlength="1" maxlength="150"
+          min="0"
+          [(ngModel)]="formoneB.oxygenUtilisationForPatientsInhealthfacility" required [readOnly]="readOnly"
+          />
+          <mat-error *ngIf="editForm.controls.oxygenUtilisationForPatientsInhealthfacility?.errors?.required">
+          {{'validations.required' | translate}} only numbers are allowed</mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+
+      <mat-form-field  appearance="outline" fxFlex="50">
+        <mat-label>No. of Covid patients in ICU/ Ventilator</mat-label>
+        <input
+        type="number" positivenumbers
+          placeholder="No. of Covid patients in ICU/ Ventilator"
+          matInput
+          name="numOfpatientsInVentilator"
+          minlength="1" maxlength="150"
+          min="0"
+          [(ngModel)]="formoneB.numOfpatientsInVentilator" required [readOnly]="readOnly"
+          />
+          <mat-error *ngIf="editForm.controls.numOfpatientsInVentilator?.errors?.required">
+          {{'validations.required' | translate}} only numbers are allowed</mat-error>
+      </mat-form-field>
+
+          <mat-form-field  appearance="outline" fxFlex="50">
+          <mat-label>Utilisation of oxygen (in CM)</mat-label>
+          <input
+          type="number" positivenumbers
+            placeholder="Utilisation of oxygen (in CM)"
+            matInput
+            name="oxygenUtilisationForPatientsInIcu"
+            minlength="2" maxlength="150"
+            min="0"
+            minlength="2" maxlength="150"
+
+              [(ngModel)]="formoneB.oxygenUtilisationForPatientsInIcu" required [readOnly]="readOnly"
+            />
+             <mat-error *ngIf="editForm.controls.oxygenUtilisationForPatientsInIcu?.errors?.required">
+              {{'validations.required' | translate}} only numbers are allowed</mat-error>
+          </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+      <mat-form-field  appearance="outline" fxFlex="50">
+        <mat-label>No. of Covid patients on HFNO</mat-label>
+        <input
+        type="number" positivenumbers
+          placeholder="No. of Covid patients on HFNO"
+          matInput
+          name="numOfPatientsOnHFNO"
+          minlength="2" maxlength="150"
+          min="0"
+          minlength="2" maxlength="150"
+
+            [(ngModel)]="formoneB.numOfPatientsOnHFNO" required [readOnly]="readOnly"
+          />
+           <mat-error *ngIf="editForm.controls.numOfPatientsOnHFNO?.errors?.required">
+            {{'validations.required' | translate}} only numbers are allowed</mat-error>
+        </mat-form-field>
+
+        <mat-form-field  appearance="outline" fxFlex="50">
+          <mat-label>Utilisation of oxygen (in CM)</mat-label>
+          <input
+          type="number" positivenumbers
+            placeholder="Utilisation of oxygen (in CM)"
+            matInput
+            name="oxygenUtilisationOnHFNO"
+            minlength="2" maxlength="150"
+            min="0"
+            minlength="2" maxlength="150"
+
+              [(ngModel)]="formoneB.oxygenUtilisationOnHFNO" required [readOnly]="readOnly"
+            />
+             <mat-error *ngIf="editForm.controls.oxygenUtilisationOnHFNO?.errors?.required">
+              {{'validations.required' | translate}} only numbers are allowed</mat-error>
+          </mat-form-field>
+    </div>
+
+
+
+
+
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+      <mat-form-field  appearance="outline" fxFlex="50">
+        <mat-label>No. of Vacant O2 Beds(Today)</mat-label>
+        <input
+        type="number" positivenumbers
+          placeholder="No. of Vacant O2 Beds(Today)"
+          matInput
+          name="numVacentOxygenBeds"
+          minlength="2" maxlength="150"
+          min="0"
+          minlength="2" maxlength="150"
+
+            [(ngModel)]="formoneB.numVacentOxygenBeds" required [readOnly]="readOnly"
+          />
+           <mat-error *ngIf="editForm.controls.numVacentOxygenBeds?.errors?.required">
+            {{'validations.required' | translate}} only numbers are allowed</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" fxFlex="50">
+          <mat-label>No of Vacant ICU Beds(Today)</mat-label>
+          <input
+          type="number" positivenumbers
+            placeholder="No of Vacant ICU Beds(Today)"
+            matInput
+            name="numVacentIcuBeds"
+            minlength="2" maxlength="150"
+            min="0"
+
+
+              [(ngModel)]="formoneB.numVacentIcuBeds" required [readOnly]="readOnly"
+            />
+             <mat-error *ngIf="editForm.controls.numVacentIcuBeds?.errors?.required">
+              {{'validations.required' | translate}} only numbers are allowed</mat-error>
+          </mat-form-field>
+    </div>
+
+
+
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+      <mat-form-field  appearance="outline" fxFlex="50">
+        <mat-label>No. of Patients admitted today (On O2)(Per Day)</mat-label>
+        <input
+        type="number" positivenumbers
+          placeholder="No. of Patients admitted today (On O2)(Per Day)"
+          matInput
+          name="numOfO2PatientsAdmitToday"
+          minlength="2" maxlength="150"
+          min="0"
+          minlength="2" maxlength="150"
+
+            [(ngModel)]="formoneB.numOfO2PatientsAdmitToday" required [readOnly]="readOnly"
+          />
+           <mat-error *ngIf="editForm.controls.numOfO2PatientsAdmitToday?.errors?.required">
+            {{'validations.required' | translate}} only numbers are allowed</mat-error>
+        </mat-form-field>
+
+        <mat-form-field  appearance="outline" fxFlex="50">
+          <mat-label>No. of Patients admitted today (On ICU)(Per Day)</mat-label>
+          <input
+          type="number" positivenumbers
+            placeholder="No. of Patients admitted today (On ICU)(Per Day)"
+            matInput
+            name="numOfICUPatientsAdmitToday"
+            minlength="2" maxlength="150"
+            min="0"
+            minlength="2" maxlength="150"
+
+              [(ngModel)]="formoneB.numOfICUPatientsAdmitToday" required [readOnly]="readOnly"
+            />
+             <mat-error *ngIf="editForm.controls.numOfICUPatientsAdmitToday?.errors?.required">
+              {{'validations.required' | translate}} only numbers are allowed</mat-error>
+          </mat-form-field>
+    </div>
+
+
+
+
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+      <mat-form-field  appearance="outline" fxFlex="50">
+        <mat-label>No. of Patients Discharged today(On O2)(Per Day)</mat-label>
+        <input
+        type="number" positivenumbers
+          placeholder="No. of Patients Discharged today(On O2)(Per Day)"
+          matInput
+          name="numOfO2PatientsDischargeToday"
+          minlength="2" maxlength="150"
+          min="0"
+          minlength="2" maxlength="150"
+
+            [(ngModel)]="formoneB.numOfO2PatientsDischargeToday" required [readOnly]="readOnly"
+          />
+           <mat-error *ngIf="editForm.controls.numOfO2PatientsDischargeToday?.errors?.required">
+            {{'validations.required' | translate}} only numbers are allowed</mat-error>
+        </mat-form-field>
+
+        <mat-form-field  appearance="outline" fxFlex="50">
+          <mat-label>No. of Patients Discharged today(On ICU)(Per Day)</mat-label>
+          <input
+          type="number" positivenumbers
+            placeholder="No. of Patients Discharged today(On ICU)(Per Day)"
+            matInput
+            name="numOfICUPatientsDischargeToday"
+            minlength="2" maxlength="150"
+            min="0"
+            minlength="2" maxlength="150"
+
+              [(ngModel)]="formoneB.numOfICUPatientsDischargeToday" required [readOnly]="readOnly"
+            />
+             <mat-error *ngIf="editForm.controls.numOfICUPatientsDischargeToday?.errors?.required">
+              {{'validations.required' | translate}} only numbers are allowed</mat-error>
+          </mat-form-field>
+    </div>
+
+
+
+
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+      <mat-form-field  appearance="outline" fxFlex="50">
+        <mat-label>Average no. of days of stay in Hospital</mat-label>
+        <input
+        type="number" positivenumbers
+          placeholder="Average no. of days of stay in Hospital"
+          matInput
+          name="averageNumOfDaysStayInHosp"
+          minlength="2" maxlength="150"
+          min="0"
+          minlength="2" maxlength="150"
+
+            [(ngModel)]="formoneB.averageNumOfDaysStayInHosp" required [readOnly]="readOnly"
+          />
+           <mat-error *ngIf="editForm.controls.averageNumOfDaysStayInHosp?.errors?.required">
+            {{'validations.required' | translate}} only numbers are allowed</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" fxFlex="50">
+          <mat-label>No. of Covid deaths today(Per Day)</mat-label>
+          <input
+          type="number" positivenumbers
+            placeholder="No. of Covid deaths today(Per Day)"
+            matInput
+            name="numOfCovidDeathtoday"
+            minlength="2" maxlength="150"
+            min="0"
+            minlength="2" maxlength="150"
+
+              [(ngModel)]="formoneB.numOfCovidDeathtoday" required [readOnly]="readOnly"
+            />
+             <mat-error *ngIf="editForm.controls.numOfCovidDeathtoday?.errors?.required">
+              {{'validations.required' | translate}} only numbers are allowed</mat-error>
+          </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+      <mat-form-field  appearance="outline" fxFlex="50">
+        <mat-label>Steps taken for rational use of O2</mat-label>
+        <input
+        type="text"
+          placeholder="Steps taken for rational use of O2"
+          matInput
+          name="stepForRationalUseOfO2"
+          minlength="2" maxlength="150"
+
+            [(ngModel)]="formoneB.stepForRationalUseOfO2" required [readOnly]="readOnly"
+          />
+           <mat-error *ngIf="editForm.controls.stepForRationalUseOfO2?.errors?.required">
+            {{'validations.required' | translate}} Enter minimum of 2 letters</mat-error>
+        </mat-form-field>
+
+        <mat-form-field  appearance="outline" fxFlex="50">
+          <mat-label>Remarks</mat-label>
+          <input
+          type="text"
+            placeholder="Remarks"
+            matInput
+            name="remark"
+            minlength="2" maxlength="150"
+            [(ngModel)]="formoneB.remark" [readOnly]="readOnly"
+              />
+
+          </mat-form-field>
+
+    </div>
+    <!-- <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+      <mat-form-field *ngIf="action != 'Delete'" appearance="outline" fxFlex="50">
+        <mat-label>Last Modified </mat-label>
+        <input
+        type="number" positivenumbers
+          placeholder="Last Modified"
+          matInput
+          name="lastModified"
+          minlength="2" maxlength="150"
+
+            [(ngModel)]="formoneB.lastModified" required [readOnly]="readOnly"
+          />
+           <mat-error *ngIf="editForm.controls.lastModified.errors?.required">
+            {{'validations.required' | translate}} Enter minimum of 2 numbers</mat-error>
+        </mat-form-field>
+    </div> -->
+    </form>
+    <div mat-dialog-actions align="end">
+    <button
+      mat-raised-button
+      color="primary"
+      class="m-t-8"
+      (click)="save()"
+      [disabled]="editForm.form.invalid"
+    >
+      Save</button
+    >&nbsp;&nbsp; &nbsp;&nbsp;
+    <button mat-raised-button mat-dialog-close color="warn" class="m-t-8" [disabled]="isSaving">
+      Cancel
+    </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,65 @@
+{
+  "menu": [
+    {
+      "route": "admin/annexure-abc/list",
+      "name": "annexABC",
+      "type": "link",
+      "icon": "local_hospital"
+    },
+    {
+      "route": "admin/audit-form-s/list",
+      "name": "oxygenauditformS",
+      "type": "link",
+      "icon": "store"
+    },
+    {
+      "route": "admin/audit-form-a/list",
+      "name": "oxygenauditformA",
+      "type": "link",
+      "icon": "store"
+    },
+    {
+      "route": "admin/monitor-form",
+      "name": "monitorform",
+      "type": "sub",
+      "icon": "store",
+      "children": [
+        {
+          "route": "list",
+          "name": "list",
+          "type": "link"
+        },
+        {
+          "route": "listevening",
+          "name": "listevening",
+          "type": "link"
+        }
+
+      ]
+    },
+    {
+      "route": "admin/rate-regulation-form/list",
+      "name": "rateregulationform",
+      "type": "link",
+      "icon": "store"
+    },
+    {
+      "route": "admin/form1-a/list",
+      "name": "forms1A",
+      "type": "link",
+      "icon": "store"
+    },
+    {
+      "route": "admin/form1-b/list",
+      "name": "forms1B",
+      "type": "link",
+      "icon": "store"
+    },
+    {
+      "route": "admin/form1-c/list",
+      "name": "forms1C",
+      "type": "link",
+      "icon": "store"
+    }
+  ]
+}
