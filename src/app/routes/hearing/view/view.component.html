@@ -46,7 +46,7 @@
             <div fxFlex="50" fxFlex.lt-sm="100">
               <div class="row">
                 <div class="column"><span style="font-weight:bold">Hearing Date :</span></div>
-                <div class="column">{{detail.hearingDate | date: 'shortDate'}}</div>
+                <div class="column">{{detail.hearingDate | date: 'medium'}}</div>
               </div>
             </div>
 
@@ -62,7 +62,7 @@
             </div>
 
             <div fxFlex="50" fxFlex.lt-sm="100">
-              <div class="row" fxLayoutGap="30px">
+              <div class="row">
                 <div class="column"><span style="font-weight:bold">Comment :</span></div>
                 <div class="column">{{detail.comment}}</div>
               </div>
@@ -80,9 +80,9 @@
             </div>
 
             <div fxFlex="50" fxFlex.lt-sm="100">
-              <div class="row" fxLayoutGap="30px">
+              <div class="row">
                 <div class="column"><span style="font-weight:bold">Next Hearing Date :</span> </div>
-                <div class="column">{{detail.nextHearingDate | date: 'shortDate' }}</div>
+                <div class="column">{{detail.nextHearingDate | date: 'medium' }}</div>
               </div>
             </div>
 
@@ -94,7 +94,7 @@
               <div class="row">
                 <div class="column"><span style="font-weight:bold">Previous Hearing Date :</span>
                 </div>
-                <div class="column"> {{detail.previousHearingDate}}</div>
+                <div class="column"> {{detail.previousHearingDate | date: 'medium' }}</div>
               </div>
             </div>
 
