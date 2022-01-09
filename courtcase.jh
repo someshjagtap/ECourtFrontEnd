@@ -1,0 +1,89 @@
+entity CourtCase {
+	caseNo String,
+    villageName String,
+    accuserName String,
+    applicationNo String,
+    landReferenceNo String, 
+    firstAppeal String,
+    amount String,
+    projectName String,  
+    courtName String,
+    defendantName String,
+    caseDescription String,
+    caseFilingDate Instant,
+    totalClaimAmount String,
+    caseOfficer String,
+    caselawyer String,
+    nextHearingDate Instant,
+    amountDepositeInCourt String,
+    lar String,
+    incCompensation String,
+    amountPaidSLO String,
+    chequeNo String,
+    chequeDate Instant,
+    appealNo String,
+    courtAmount String,
+    appealAmount String,
+    appealDate Instant,
+	description String,
+	comment String ,
+	caseStatus String,
+	freefield1 String,
+	freefield2 String,
+	freefield3 String,
+    lastModifiedBy String,
+    lastModified String
+}
+
+entity Hearing {
+	hearingDate Instant,
+	nextHearingDate Instant,
+	description String,
+	previousHearingDate Instant,
+	conclusion String,
+	comment String,
+	status String,
+	freefield1 String,
+	freefield2 String,
+	freefield3 String,
+	freefield4 String,
+	freefield5 String,
+    lastModifiedBy String,
+    lastModified String,
+}
+
+entity UserData {
+	firstname String,
+    lastName String,
+    contactNo String,
+    emailId String,
+    address String,
+    userName String,
+    password String,
+    verifyPassword String,
+    lastModifiedBy String,
+    lastModified String   
+}
+
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	// Hearing{case} to CourtCase,
+   // CourtCase{user} to UserData,
+	CourtCase{hearing} to Hearing{courtCase},
+	CourtCase{userData} to UserData{courtCase}
+}
+
+
+// Set pagination options
+paginate * with infinite-scroll
+paginate * with pagination
+
+// Use Data Transfer Objects (DTO)
+ dto * with mapstruct
+
+// Set service options to all except few
+service * with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
